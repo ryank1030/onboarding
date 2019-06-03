@@ -1,0 +1,5 @@
+rootProject.name = 'onboarding'
+include 'onboarding-api'
+include 'onboarding-client'
+include 'onboarding-service'
+
