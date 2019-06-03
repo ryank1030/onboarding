@@ -10,6 +10,14 @@ import org.springframework.context.support.MessageSourceAccessor;
 @SpringBootApplication
 public class OnboadingApplication {
 
+    //TODO implement find for users
+    // - by firstName
+    // - by lastName
+    // implement phone subresource (all crud operations) and tests
+    // create action to make a phone number primary
+    // use twillio to send an sms code and verify a phone number (more actions)
+
+
     @Autowired
     private MessageSource messageSource;
 
