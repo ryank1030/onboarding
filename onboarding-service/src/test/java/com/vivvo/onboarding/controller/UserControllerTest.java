@@ -13,6 +13,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import javax.ws.rs.BadRequestException;
 import javax.ws.rs.NotFoundException;
 
+import java.util.List;
 import java.util.UUID;
 
 import static org.junit.Assert.*;
@@ -57,7 +58,21 @@ public class UserControllerTest {
         userClient.get(new UUID(0,1));
     }
 
+    @Test
+    public void testCreateAndFindByFirstName_returnedObjectsShouldMatch() {
+        UserDto createdUser = userClient.create(getValidUserDto());
+        List<UserDto> getUser = userClient.findByFirstName(createdUser.getFirstName());
+        assertTrue(getUser.contains(createdUser));
 
+    }
+
+    @Test
+    public void testCreateAndFindByLastName_returnedObjectsShouldMatch() {
+        UserDto createdUser = userClient.create(getValidUserDto());
+        List<UserDto> getUser = userClient.findByLastName(createdUser.getLastName());
+        assertTrue(getUser.contains(createdUser));
+
+    }
     //tests for update
     //test for delete
     //etc

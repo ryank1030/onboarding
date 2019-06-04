@@ -6,6 +6,8 @@ import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.GenericType;
+import java.util.List;
 import java.util.UUID;
 
 public class UserClient {
@@ -42,6 +44,18 @@ public class UserClient {
                 .get(UserDto.class);
     }
 
+    public List<UserDto> findByFirstName(String fname) {
+        return userTarget("firstName", fname)
+                .request()
+                .get(new GenericType<List<UserDto>>(){});
+    }
+
+    public List<UserDto> findByLastName(String lname) {
+        return userTarget("lastName", lname)
+                .request()
+                .get(new GenericType<List<UserDto>>(){});  //Don't understand this
+    }
+
     private WebTarget userTarget() {
         return client.target(baseUri)
                 .path("api")
@@ -54,6 +68,10 @@ public class UserClient {
                 .path(userId.toString());
     }
 
+    private WebTarget userTarget(String param, String name) {
+        return userTarget()
+                .queryParam(param, name);
+    }
 
 
 

@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.ws.rs.Path;
+import java.lang.reflect.Parameter;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
@@ -24,6 +26,7 @@ public class UserController {
             .setLastName("Dodd")
             .setUserId(UUID.randomUUID())
             .setUsername("doddt"));
+
     }
 
     @PostMapping
@@ -48,4 +51,11 @@ public class UserController {
         dto.setUserId(userId);
         return userService.update(dto);
     }
+
+    @GetMapping(params = "firstName")
+    public List<UserDto> findByFirstName(@RequestParam String firstName) { return userService.findByFirstName(firstName); }
+
+    @GetMapping(params = "lastName")
+    public List<UserDto> findByLastName(@RequestParam String lastName) { return userService.findByLastName(lastName); }
+
 }

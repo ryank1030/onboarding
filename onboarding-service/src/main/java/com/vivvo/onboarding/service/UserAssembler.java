@@ -24,6 +24,7 @@ public class UserAssembler {
                 .setFirstName(dto.getFirstName())
                 .setLastName(dto.getLastName())
                 .setUsername(dto.getUsername());
+
     }
 
 }
