@@ -1,5 +1,6 @@
 package com.vivvo.onboarding.controller;
 
+import com.vivvo.onboarding.PhoneDto;
 import com.vivvo.onboarding.UserDto;
 import com.vivvo.onboarding.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,9 +54,12 @@ public class UserController {
     }
 
     @GetMapping(params = "firstName")
-    public List<UserDto> findByFirstName(@RequestParam String firstName) { return userService.findByFirstName(firstName); }
+    public List<UserDto> findByFirstName(@RequestParam String firstName) {
+        return userService.findByFirstName(firstName);
+    }
 
     @GetMapping(params = "lastName")
-    public List<UserDto> findByLastName(@RequestParam String lastName) { return userService.findByLastName(lastName); }
-
+    public List<UserDto> findByLastName(@RequestParam String lastName) {
+        return userService.findByLastName(lastName);
+    }
 }

@@ -1,14 +1,20 @@
 package com.vivvo.onboarding.service;
 
 import com.vivvo.onboarding.UserDto;
+import com.vivvo.onboarding.controller.PhoneController;
 import com.vivvo.onboarding.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.UUID;
 
+
+
 @Component
 public class UserAssembler {
+
+    @Autowired
+    private PhoneController phoneController;
 
     public UserDto assemble(User entity) {
         return new UserDto()
@@ -24,7 +30,6 @@ public class UserAssembler {
                 .setFirstName(dto.getFirstName())
                 .setLastName(dto.getLastName())
                 .setUsername(dto.getUsername());
-
     }
 
 }

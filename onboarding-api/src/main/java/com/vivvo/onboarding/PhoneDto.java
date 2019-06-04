@@ -6,17 +6,16 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
-import java.util.List;
 import java.util.UUID;
 
 @Data
 @Accessors(chain = true)
-public class UserDto {
+public class PhoneDto {
 
+    private UUID phoneId;
     private UUID userId;
-    private String username;
-    private String firstName;
-    private String lastName;
-    private List<PhoneDto> phones;
+    private String phoneNumber;
+    private boolean verified;
+    private boolean primary;
 
 }

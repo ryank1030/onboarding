@@ -11,22 +11,25 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.UUID;
 
-@Table(name = "user")
+@Table(name = "phone")
 @Entity
 @Getter
 @Setter
 @Accessors(chain = true)
-public class User {
+public class Phone {
 
     @Id
+    @Column(name = "phone_id")
+    @Type(type = "uuid-char")
+    private UUID phoneId;
+    @Column(name = "phone_number")
+    private String phoneNumber;
+    @Column(name = "verified")
+    private boolean verified;
+    @Column(name = "primary")
+    private boolean primary;
     @Column(name = "user_id")
     @Type(type = "uuid-char")
     private UUID userId;
-    @Column(name = "username")
-    private String username;
-    @Column(name = "first_name")
-    private String firstName;
-    @Column(name = "last_name")
-    private String lastName;
 
 }

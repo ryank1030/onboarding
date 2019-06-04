@@ -1,17 +1,17 @@
 package com.vivvo.onboarding.service;
 
+import com.vivvo.onboarding.PhoneDto;
 import com.vivvo.onboarding.UserDto;
+import com.vivvo.onboarding.controller.PhoneController;
 import com.vivvo.onboarding.entity.User;
 import com.vivvo.onboarding.exception.NotFoundException;
 import com.vivvo.onboarding.exception.ValidationException;
+import com.vivvo.onboarding.repository.PhoneRepository;
 import com.vivvo.onboarding.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -26,17 +26,34 @@ public class UserService {
     @Autowired
     private UserValidator userValidator;
 
+    @Autowired
+    private PhoneController phoneController;
+
     public UserDto create(UserDto dto) {
         Map<String, String> errors = userValidator.validate(dto);
         if (!errors.isEmpty()) {
             throw new ValidationException(errors);
         }
 
-        return Optional.of(dto)
+        UserDto user = Optional.of(dto)
                 .map(userAssembler::disassemble)
                 .map(userRepository::save)
                 .map(userAssembler::assemble)
                 .orElseThrow(IllegalArgumentException::new);
+
+        //for each phoneDto in UserDto create a phone under that userId
+        List<PhoneDto> phones = new ArrayList<>();
+        //check for empty phone list
+        if (dto.getPhones() != null) {
+            for (PhoneDto p_dto : dto.getPhones()) {
+                p_dto.setUserId(user.getUserId());
+                phones.add(phoneController.create(p_dto));
+                //append the return results in a list & add the list to the user.phones
+            }
+            user.setPhones(phones);
+        }
+
+        return user;
     }
 
     public UserDto update(UserDto dto) {

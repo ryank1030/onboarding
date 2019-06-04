@@ -28,6 +28,8 @@ public class UserValidator {
     public static String USERNAME_REQUIRED = "user.usename.REQUIRED";
     public static String USERNAME_TAKEN = "user.usename.TAKEN";
     public static String USERNAME_CANNOT_BE_CHANGED = "user.usename.CANNOT_BE_CHANGED";
+    public static String PRIMARY_PHONE_REQUIRED = "user.primaryPhone.REQUIRED";
+    public static String PHONE_LT_16 = "user.phone.LT_16";
 
     public Map<String, String> validate(UserDto dto) {
         Map<String, String> errors = new LinkedHashMap<>();
@@ -74,6 +76,16 @@ public class UserValidator {
         }
         return errors;
     }
+    /*
+    private Map<String, String> validatePrimaryPhone(UserDto dto) {
+        Map<String, String> errors = new LinkedHashMap<>();
+        if (StringUtils.isBlank((dto.getPrimaryPhone()))) {
+            errors.put("primaryPhone", PRIMARY_PHONE_REQUIRED);
+        } else if (dto.getPrimaryPhone().length() > 16) {
+            errors.put("primaryPhone", PHONE_LT_16);
+        }
+        return errors;
+    }*/
 
     private Map<String, String> validateUsernameForUpdate(UserDto dto) {
         Map<String, String> errors = new LinkedHashMap<>();
