@@ -19,6 +19,7 @@ public class PhoneValidator {
 
     public static String PHONE_REQUIRED = "phone.REQUIRED";
     public static String PRIMARY_PHONE_LT_16 = "phone.primary.LT_16";
+    public static String INVALID_PHONE = "phone.INVALID";
 
     public Map<String, String> validate(PhoneDto dto) {
         Map<String, String> errors = new LinkedHashMap<>();
@@ -32,6 +33,8 @@ public class PhoneValidator {
             errors.put("phoneNumber", PHONE_REQUIRED);
         } else if (dto.getPhoneNumber().length() > 16) {
             errors.put("phoneNumber", PRIMARY_PHONE_LT_16);
+        } else if (!StringUtils.isNumeric(dto.getPhoneNumber())) {
+            errors.put("phoneNumber", INVALID_PHONE);
         }
         return errors;
     }
