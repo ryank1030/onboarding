@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.ws.rs.Path;
 import java.lang.reflect.Parameter;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
@@ -35,17 +36,12 @@ public class PhoneController {
 
     @DeleteMapping("/{phoneId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deletePhone(@PathVariable UUID phoneId) { phoneService.deletePhone(phoneId); }
-
-    /*
-    @DeleteMapping
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable UUID userId) { phoneService.delete(userId); }
-     */
+    public void delete(@PathVariable UUID phoneId) { phoneService.delete(phoneId); }
 
     @PutMapping("/{phoneId}")
     public PhoneDto update(@PathVariable UUID phoneId, @RequestBody PhoneDto dto) {
         dto.setPhoneId(phoneId);
         return phoneService.update(dto);
     }
+
 }

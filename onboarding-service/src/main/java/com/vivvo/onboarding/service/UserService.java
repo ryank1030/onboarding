@@ -41,14 +41,11 @@ public class UserService {
                 .map(userAssembler::assemble)
                 .orElseThrow(IllegalArgumentException::new);
 
-        //for each phoneDto in UserDto create a phone under that userId
         List<PhoneDto> phones = new ArrayList<>();
-        //check for empty phone list
         if (dto.getPhones() != null) {
             for (PhoneDto p_dto : dto.getPhones()) {
                 p_dto.setUserId(user.getUserId());
                 phones.add(phoneController.create(p_dto));
-                //append the return results in a list & add the list to the user.phones
             }
             user.setPhones(phones);
         }

@@ -1,6 +1,7 @@
 package com.vivvo.onboarding;
 
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -73,6 +74,21 @@ public class UserClient {
                 .queryParam(param, name);
     }
 
+    //--- Phone Actions ---//
 
+    public PhoneDto create(PhoneDto dto, UUID userId) {
+        return phoneTarget(userId)
+                .request()
+                .post(Entity.json(dto), PhoneDto.class);
+    }
+
+    private WebTarget phoneTarget(UUID userId) {
+        return client.target(baseUri)
+                .path("api")
+                .path("v1")
+                .path("users")
+                .path(userId.toString())
+                .path("phones");
+    }
 
 }

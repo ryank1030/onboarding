@@ -46,7 +46,7 @@ public class PhoneService {
                 .collect(Collectors.toList());
     }
 
-    public void deletePhone(UUID phoneId) {
+    public void delete(UUID phoneId) {
         Optional<Phone> phone = phoneRepository.findById(phoneId);
         if (phone.isPresent()) {
             phoneRepository.delete(phone.get());

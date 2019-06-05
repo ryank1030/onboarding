@@ -76,16 +76,6 @@ public class UserValidator {
         }
         return errors;
     }
-    /*
-    private Map<String, String> validatePrimaryPhone(UserDto dto) {
-        Map<String, String> errors = new LinkedHashMap<>();
-        if (StringUtils.isBlank((dto.getPrimaryPhone()))) {
-            errors.put("primaryPhone", PRIMARY_PHONE_REQUIRED);
-        } else if (dto.getPrimaryPhone().length() > 16) {
-            errors.put("primaryPhone", PHONE_LT_16);
-        }
-        return errors;
-    }*/
 
     private Map<String, String> validateUsernameForUpdate(UserDto dto) {
         Map<String, String> errors = new LinkedHashMap<>();
