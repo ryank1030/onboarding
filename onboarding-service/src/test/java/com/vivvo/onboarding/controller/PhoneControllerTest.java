@@ -40,12 +40,28 @@ public class PhoneControllerTest {
     }
 
     @Test
-    public void testCreateAndGetPhone_shouldSucceed() {
+    public void testCreateAndGetPhones_shouldSucceed() {
         UserDto createdUser = getValidUserDto();
         PhoneDto createdPhone = createdUser.getPhones().get(0);
         createdPhone = userClient.create(createdPhone, createdPhone.getUserId());
         List<PhoneDto> getPhones = userClient.getPhones(createdPhone.getUserId());
         assertTrue(getPhones.contains(createdPhone));
+    }
+
+    @Test
+    public void testCreateAndGetById_shouldSucceed() {
+        //create the user and the phone
+        UserDto createdUser = getValidUserDto();
+        PhoneDto createdPhone = createdUser.getPhones().get(0);
+
+        //call the create phone method returns phoneDto
+        createdPhone = userClient.create(createdPhone, createdPhone.getUserId());
+
+        //Get the phoneDto from the database
+        PhoneDto dto = userClient.getPhone(createdPhone.getPhoneId(), createdPhone.getUserId());
+
+        //compare the two
+        assertEquals(dto, createdPhone);
     }
 
     /*
@@ -58,12 +74,13 @@ public class PhoneControllerTest {
      */
 
     private UserDto getValidUserDto() {
+        UUID temp = UUID.randomUUID();
         return new UserDto()
                 .setFirstName("Ryan")
                 .setLastName("Kopp")
                 .setUsername("koppr")
-                .setUserId(UUID.randomUUID())
-                .setPhones(Collections.singletonList(getValidPhoneDto(UUID.randomUUID())));
+                .setUserId(temp)
+                .setPhones(Collections.singletonList(getValidPhoneDto(temp)));
     }
 
     private PhoneDto getValidPhoneDto(UUID userId) {

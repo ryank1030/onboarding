@@ -88,6 +88,12 @@ public class UserClient {
                 .get(new GenericType<List<PhoneDto>>(){});
     }
 
+    public PhoneDto getPhone(UUID phoneId, UUID userId) {
+        return phoneTarget(phoneId, userId)
+                .request()
+                .get(PhoneDto.class);
+    }
+
     /*
     public void delete(UUID phoneId, UUID userId) {
         phoneTarget(phoneId, userId)
