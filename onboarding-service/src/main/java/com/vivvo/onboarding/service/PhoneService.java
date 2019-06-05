@@ -27,11 +27,11 @@ public class PhoneService {
     private PhoneAssembler phoneAssembler;
 
     public PhoneDto create(PhoneDto dto) {
-        /*Map<String, String> errors = phoneValidator.validate(dto);
+        Map<String, String> errors = phoneValidator.validate(dto);
         if (!errors.isEmpty()) {
             throw new ValidationException(errors);
         }
-        */
+
         return Optional.of(dto)
                 .map(phoneAssembler::disassemble)
                 .map(phoneRepository::save)

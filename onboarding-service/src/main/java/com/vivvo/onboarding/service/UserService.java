@@ -29,8 +29,16 @@ public class UserService {
     @Autowired
     private PhoneController phoneController;
 
+    @Autowired
+    private PhoneValidator phoneValidator;
+
     public UserDto create(UserDto dto) {
         Map<String, String> errors = userValidator.validate(dto);
+
+        List<PhoneDto> phones = new ArrayList<>();
+        for (PhoneDto p_dto : dto.getPhones()) {
+            errors = phoneValidator.validate(p_dto);
+        }
         if (!errors.isEmpty()) {
             throw new ValidationException(errors);
         }
@@ -41,14 +49,13 @@ public class UserService {
                 .map(userAssembler::assemble)
                 .orElseThrow(IllegalArgumentException::new);
 
-        List<PhoneDto> phones = new ArrayList<>();
-        if (dto.getPhones() != null) {
-            for (PhoneDto p_dto : dto.getPhones()) {
-                p_dto.setUserId(user.getUserId());
-                phones.add(phoneController.create(p_dto));
-            }
-            user.setPhones(phones);
+
+        for (PhoneDto p_dto : dto.getPhones()) {
+            p_dto.setUserId(user.getUserId());
+            phones.add(phoneController.create(p_dto));
         }
+        user.setPhones(phones);
+
 
         return user;
     }

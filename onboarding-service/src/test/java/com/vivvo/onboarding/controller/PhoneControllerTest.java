@@ -44,6 +44,15 @@ public class PhoneControllerTest {
         assertTrue(getPhones.contains(createdPhone));
     }
 
+    /*
+    @Test
+    public void testCreateAndDeletePhone_shouldSucceed() {
+        PhoneDto createdPhone = getValidPhoneDto();
+        createdPhone = userClient.create(createdPhone, createdPhone.getUserId());
+        assertNull(createdPhone.delete(createdPhone.getPhoneId(), createdPhone.getUserId()));
+    }
+     */
+
     private UserDto getValidUserDto() {
         return new UserDto()
             .setFirstName("Ryan")

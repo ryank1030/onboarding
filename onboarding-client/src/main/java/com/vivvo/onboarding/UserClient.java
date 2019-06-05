@@ -88,10 +88,23 @@ public class UserClient {
                 .get(new GenericType<List<PhoneDto>>(){});
     }
 
+    /*
+    public void delete(UUID phoneId, UUID userId) {
+        phoneTarget(phoneId, userId)
+                .request()
+                .delete(Void.class);
+    }
+     */
+
     private WebTarget phoneTarget(UUID userId) {
         return userTarget()
                 .path(userId.toString())
                 .path("phones");
+    }
+
+    private WebTarget phoneTarget(UUID phoneId, UUID userId) {
+        return phoneTarget(userId)
+                .path(phoneId.toString());
     }
 
 }
