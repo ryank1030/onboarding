@@ -21,7 +21,8 @@ public class UserAssembler {
                 .setUserId(entity.getUserId())
                 .setFirstName(entity.getFirstName())
                 .setLastName(entity.getLastName())
-                .setUsername(entity.getUsername());
+                .setUsername(entity.getUsername())
+                .setPhones(phoneController.get(entity.getUserId()));
     }
 
     public User disassemble(UserDto dto) {

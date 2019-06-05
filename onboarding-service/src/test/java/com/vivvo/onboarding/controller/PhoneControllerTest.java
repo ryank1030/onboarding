@@ -9,7 +9,9 @@ import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 
 import static org.junit.Assert.*;
 
@@ -31,14 +33,16 @@ public class PhoneControllerTest {
 
     @Test
     public void testCreate_shouldSucceed() {
-        PhoneDto createdPhone = getValidPhoneDto();
+        UserDto createdUser = getValidUserDto();
+        PhoneDto createdPhone = createdUser.getPhones().get(0);
         createdPhone = userClient.create(createdPhone, createdPhone.getUserId());
         assertNotNull(createdPhone.getPhoneId());
     }
 
     @Test
     public void testCreateAndGetPhone_shouldSucceed() {
-        PhoneDto createdPhone = getValidPhoneDto();
+        UserDto createdUser = getValidUserDto();
+        PhoneDto createdPhone = createdUser.getPhones().get(0);
         createdPhone = userClient.create(createdPhone, createdPhone.getUserId());
         List<PhoneDto> getPhones = userClient.getPhones(createdPhone.getUserId());
         assertTrue(getPhones.contains(createdPhone));
@@ -55,18 +59,20 @@ public class PhoneControllerTest {
 
     private UserDto getValidUserDto() {
         return new UserDto()
-            .setFirstName("Ryan")
-            .setLastName("Kopp")
-            .setUsername("koppr");
+                .setFirstName("Ryan")
+                .setLastName("Kopp")
+                .setUsername("koppr")
+                .setUserId(UUID.randomUUID())
+                .setPhones(Collections.singletonList(getValidPhoneDto(UUID.randomUUID())));
     }
 
-    private PhoneDto getValidPhoneDto() {
-        UserDto createdUser = userClient.create(getValidUserDto());
+    private PhoneDto getValidPhoneDto(UUID userId) {
         return new PhoneDto()
-                .setUserId(createdUser.getUserId())
+                .setUserId(userId)
+                .setPhoneId(UUID.randomUUID())
                 .setPhoneNumber("1112223333")
-                .setPrimary(true)
-                .setVerified(true);
+                .setVerified(true)
+                .setPrimary(true);
     }
 
 }

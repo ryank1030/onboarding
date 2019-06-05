@@ -1,5 +1,6 @@
 package com.vivvo.onboarding.controller;
 
+import com.vivvo.onboarding.PhoneDto;
 import com.vivvo.onboarding.UserClient;
 import com.vivvo.onboarding.UserDto;
 import org.junit.Before;
@@ -13,6 +14,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 import javax.ws.rs.BadRequestException;
 import javax.ws.rs.NotFoundException;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -82,7 +86,17 @@ public class UserControllerTest {
         return new UserDto()
                 .setFirstName("Tim")
                 .setLastName("Dodd")
-                .setUsername("doddt");
+                .setUsername("doddt")
+                .setPhones(Collections.singletonList(getValidPhoneDto(UUID.randomUUID())));
+    }
+
+    private PhoneDto getValidPhoneDto(UUID userId) {
+        return new PhoneDto()
+                .setUserId(userId)
+                .setPhoneId(UUID.randomUUID())
+                .setPhoneNumber("1112223333")
+                .setVerified(true)
+                .setPrimary(true);
     }
 
 }

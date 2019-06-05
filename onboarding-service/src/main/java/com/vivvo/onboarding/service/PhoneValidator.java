@@ -37,7 +37,6 @@ public class PhoneValidator {
 
     public Map<String, String> validateList(List<PhoneDto> dtos) {
         Map<String, String> errors = new LinkedHashMap<>();
-        //check to see if the list is empty
         if (dtos.isEmpty()) {
             errors.put("phones", PHONE_REQUIRED);
         }
