@@ -46,7 +46,7 @@ public class PhoneService {
                 .collect(Collectors.toList());
     }
 
-    public void delete(UUID phoneId) {
+    public void deletePhone(UUID phoneId) {
         Optional<Phone> phone = phoneRepository.findById(phoneId);
         if (phone.isPresent()) {
             phoneRepository.delete(phone.get());
@@ -54,6 +54,22 @@ public class PhoneService {
             throw new NotFoundException(phoneId);
         }
     }
+
+    public PhoneDto update(PhoneDto dto) {
+        /*
+        Map<String, String> errors = phoneValidator.validateForUpdate(dto);
+        if (!errors.isEmpty()) {
+            throw new ValidationException(errors);
+        }
+         */
+
+        return Optional.of(dto)
+                .map(phoneAssembler::disassemble)
+                .map(phoneRepository::save)
+                .map(phoneAssembler::assemble)
+                .orElseThrow(IllegalArgumentException::new);
+    }
+
 }
 
 

@@ -35,5 +35,17 @@ public class PhoneController {
 
     @DeleteMapping("/{phoneId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable UUID phoneId) { phoneService.delete(phoneId); }
+    public void deletePhone(@PathVariable UUID phoneId) { phoneService.deletePhone(phoneId); }
+
+    /*
+    @DeleteMapping
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable UUID userId) { phoneService.delete(userId); }
+     */
+
+    @PutMapping("/{phoneId}")
+    public PhoneDto update(@PathVariable UUID phoneId, @RequestBody PhoneDto dto) {
+        dto.setPhoneId(phoneId);
+        return phoneService.update(dto);
+    }
 }
