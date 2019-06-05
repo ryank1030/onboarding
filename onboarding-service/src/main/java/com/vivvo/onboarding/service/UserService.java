@@ -35,7 +35,7 @@ public class UserService {
     public UserDto create(UserDto dto) {
         Map<String, String> errors = userValidator.validate(dto);
 
-        errors = phoneValidator.validateList(dto.getPhones());
+        errors.putAll(phoneValidator.validateList(dto.getPhones()));
 
         if (!errors.isEmpty()) {
             throw new ValidationException(errors);
