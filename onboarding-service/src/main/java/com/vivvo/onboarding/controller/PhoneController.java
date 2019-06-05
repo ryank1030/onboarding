@@ -47,7 +47,7 @@ public class PhoneController {
         return phoneService.update(dto);
     }
 
-   /* @PutMapping("/{phoneId}/makePrimary")
-    public void makePrimary(@PathVariable UUID phoneId) { phoneService.makePrimary(phoneId); }*/
+    @PutMapping("/{phoneId}/makePrimary")
+    public void makePrimary(@PathVariable UUID phoneId) { phoneService.makePrimary(phoneId); }
 
 }

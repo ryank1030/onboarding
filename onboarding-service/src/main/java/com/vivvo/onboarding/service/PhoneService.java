@@ -76,17 +76,22 @@ public class PhoneService {
                 .orElseThrow(() -> new NotFoundException(phoneId));
     }
 
-    /*public void makePrimary(UUID phoneId) {
-        //get the userid from phoneid
-        List<PhoneDto> dtos = get(userId);
+    public void makePrimary(UUID phoneId) {
+        List<PhoneDto> dtos = getList(get(phoneId).getUserId());
         for(PhoneDto dto : dtos) {
             if (dto.getPhoneId().equals(phoneId)) {
-                dto.setPrimary(true);
+                Optional.of(dto.setPrimary(true))
+                        .map(phoneAssembler::disassemble)
+                        .map(phoneRepository::save)
+                        .orElseThrow(IllegalArgumentException::new);
             } else {
-                dto.setPrimary(false);
+                Optional.of(dto.setPrimary(false))
+                        .map(phoneAssembler::disassemble)
+                        .map(phoneRepository::save)
+                        .orElseThrow(IllegalArgumentException::new);
             }
         }
-    }*/
+    }
 }
 
 
