@@ -67,8 +67,6 @@ public class PhoneValidator {
         Map<String, String> errors = new LinkedHashMap<>();
         for (int i = 0; i < dtos.size(); i++) {
             for (int j = i + 1; j < dtos.size(); j++){
-                System.out.println(dtos.get(i).getPhoneNumber());
-                System.out.println(dtos.get(j).getPhoneNumber());
                 if (dtos.get(i).getPhoneNumber().equals(dtos.get(j).getPhoneNumber())) {
                     errors.put("phoneNumber", PHONE_DUPLICATE);
                 }
