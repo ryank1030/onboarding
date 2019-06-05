@@ -32,4 +32,8 @@ public class PhoneController {
 
     @GetMapping
     public List<PhoneDto> get(@PathVariable UUID userId) { return phoneService.get(userId); }
+
+    @DeleteMapping("/{phoneId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable UUID phoneId) { phoneService.delete(phoneId); }
 }

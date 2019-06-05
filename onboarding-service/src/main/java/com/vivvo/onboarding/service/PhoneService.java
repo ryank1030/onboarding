@@ -2,6 +2,7 @@ package com.vivvo.onboarding.service;
 
 import com.vivvo.onboarding.PhoneDto;
 import com.vivvo.onboarding.UserDto;
+import com.vivvo.onboarding.entity.Phone;
 import com.vivvo.onboarding.entity.User;
 import com.vivvo.onboarding.exception.NotFoundException;
 import com.vivvo.onboarding.exception.ValidationException;
@@ -43,6 +44,15 @@ public class PhoneService {
                 .stream()
                 .map(phoneAssembler::assemble)
                 .collect(Collectors.toList());
+    }
+
+    public void delete(UUID phoneId) {
+        Optional<Phone> phone = phoneRepository.findById(phoneId);
+        if (phone.isPresent()) {
+            phoneRepository.delete(phone.get());
+        } else {
+            throw new NotFoundException(phoneId);
+        }
     }
 }
 
