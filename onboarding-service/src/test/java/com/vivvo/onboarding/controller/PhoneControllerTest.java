@@ -9,6 +9,8 @@ import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
@@ -34,7 +36,13 @@ public class PhoneControllerTest {
         assertNotNull(createdPhone.getPhoneId());
     }
 
-    
+    @Test
+    public void testCreateAndGetPhone_shouldSucceed() {
+        PhoneDto createdPhone = getValidPhoneDto();
+        createdPhone = userClient.create(createdPhone, createdPhone.getUserId());
+        List<PhoneDto> getPhones = userClient.getPhones(createdPhone.getUserId());
+        assertTrue(getPhones.contains(createdPhone));
+    }
 
     private UserDto getValidUserDto() {
         return new UserDto()

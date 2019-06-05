@@ -82,11 +82,14 @@ public class UserClient {
                 .post(Entity.json(dto), PhoneDto.class);
     }
 
+    public List<PhoneDto> getPhones(UUID userId) {
+        return phoneTarget(userId)
+                .request()
+                .get(new GenericType<List<PhoneDto>>(){});
+    }
+
     private WebTarget phoneTarget(UUID userId) {
-        return client.target(baseUri)
-                .path("api")
-                .path("v1")
-                .path("users")
+        return userTarget()
                 .path(userId.toString())
                 .path("phones");
     }
