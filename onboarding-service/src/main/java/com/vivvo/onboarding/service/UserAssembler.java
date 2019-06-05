@@ -22,7 +22,7 @@ public class UserAssembler {
                 .setFirstName(entity.getFirstName())
                 .setLastName(entity.getLastName())
                 .setUsername(entity.getUsername())
-                .setPhones(phoneController.get(entity.getUserId()));
+                .setPhones(phoneController.getList(entity.getUserId()));
     }
 
     public User disassemble(UserDto dto) {

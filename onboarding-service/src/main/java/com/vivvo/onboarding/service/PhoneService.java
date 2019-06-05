@@ -39,7 +39,7 @@ public class PhoneService {
                 .orElseThrow(IllegalArgumentException::new);
     }
 
-    public List<PhoneDto> get(UUID userId) {
+    public List<PhoneDto> getList(UUID userId) {
         return phoneRepository.findByUserId(userId)
                 .stream()
                 .map(phoneAssembler::assemble)
@@ -70,6 +70,23 @@ public class PhoneService {
                 .orElseThrow(IllegalArgumentException::new);
     }
 
+    public PhoneDto get(UUID phoneId) {
+        return phoneRepository.findById(phoneId)
+                .map(phoneAssembler::assemble)
+                .orElseThrow(() -> new NotFoundException(phoneId));
+    }
+
+    /*public void makePrimary(UUID phoneId) {
+        //get the userid from phoneid
+        List<PhoneDto> dtos = get(userId);
+        for(PhoneDto dto : dtos) {
+            if (dto.getPhoneId().equals(phoneId)) {
+                dto.setPrimary(true);
+            } else {
+                dto.setPrimary(false);
+            }
+        }
+    }*/
 }
 
 

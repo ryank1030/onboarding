@@ -32,7 +32,10 @@ public class PhoneController {
     }
 
     @GetMapping
-    public List<PhoneDto> get(@PathVariable UUID userId) { return phoneService.get(userId); }
+    public List<PhoneDto> getList(@PathVariable UUID userId) { return phoneService.getList(userId); }
+
+    @GetMapping("/{phoneId}")
+    public PhoneDto get(@PathVariable UUID phoneId) { return phoneService.get(phoneId); }
 
     @DeleteMapping("/{phoneId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
@@ -43,5 +46,8 @@ public class PhoneController {
         dto.setPhoneId(phoneId);
         return phoneService.update(dto);
     }
+
+   /* @PutMapping("/{phoneId}/makePrimary")
+    public void makePrimary(@PathVariable UUID phoneId) { phoneService.makePrimary(phoneId); }*/
 
 }
