@@ -69,7 +69,7 @@ public class PhoneControllerTest {
     }
 
     @Test(expected = NotFoundException.class)
-    public void testCreateAndDeletePhone_shouldSucceed() {
+    public void testCreateAndDeletePhone_shouldReturnNotFound() {
         UserDto createdUser = getValidUserDto();
         PhoneDto createdPhone = createdUser.getPhones().get(0);
         createdPhone = userClient.create(createdPhone, createdPhone.getUserId());
