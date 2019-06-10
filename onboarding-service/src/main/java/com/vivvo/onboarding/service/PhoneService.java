@@ -1,21 +1,23 @@
 package com.vivvo.onboarding.service;
 
-import com.twilio.twiml.voice.Sms;
+import com.twilio.Twilio;
+import com.twilio.rest.api.v2010.account.Message;
+import com.twilio.type.PhoneNumber;
+import com.vivvo.onboarding.ApplicationProperties;
 import com.vivvo.onboarding.PhoneDto;
-import com.vivvo.onboarding.UserDto;
 import com.vivvo.onboarding.entity.Phone;
-import com.vivvo.onboarding.entity.User;
 import com.vivvo.onboarding.exception.NotFoundException;
 import com.vivvo.onboarding.exception.ValidationException;
 import com.vivvo.onboarding.repository.PhoneRepository;
-import com.vivvo.onboarding.repository.UserRepository;
-import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.ws.rs.BadRequestException;
 import java.security.SecureRandom;
-import java.util.*;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -29,6 +31,9 @@ public class PhoneService {
 
     @Autowired
     private PhoneAssembler phoneAssembler;
+
+    @Autowired
+    private ApplicationProperties applicationProperties;
 
     public PhoneDto create(PhoneDto dto) {
         Map<String, String> errors = phoneValidator.validate(dto);
@@ -106,7 +111,6 @@ public class PhoneService {
 
     public void verifyPhone(UUID userId, UUID phoneId) {
         PhoneDto dto = get(userId, phoneId);
-        SmsSender send = new SmsSender();
         SecureRandom rand = new SecureRandom();
         String link = "http://localhost:4444/api/v1/users/"
         + userId
@@ -118,7 +122,7 @@ public class PhoneService {
             link += rand.nextInt(10);
         }
 
-        send.sendMessage(dto.getPhoneNumber(), link);
+        sendMessage(dto.getPhoneNumber(), link);
         dto.setVerificationLink(link.substring(link.length() - 8));
         Optional.of(dto)
                 .map(phoneAssembler::disassemble)
@@ -137,6 +141,20 @@ public class PhoneService {
         } else {
             throw new BadRequestException();
         }
+    }
+
+    public void sendMessage(String phone, String link) {
+
+        Twilio.init(applicationProperties.getTwilio().getAccountSID(), applicationProperties.getTwilio().getAuthToken());
+
+        Message message = Message
+                .creator(new PhoneNumber(phone), // to
+                        new PhoneNumber("+16475603984"), // from
+                        link)
+                .create();
+
+        System.out.println("SMS verification: " + message.getSid() + " link: " + link);
+
     }
 }
 

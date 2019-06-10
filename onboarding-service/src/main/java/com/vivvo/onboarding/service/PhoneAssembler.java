@@ -2,7 +2,6 @@ package com.vivvo.onboarding.service;
 
 import com.vivvo.onboarding.PhoneDto;
 import com.vivvo.onboarding.entity.Phone;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.UUID;

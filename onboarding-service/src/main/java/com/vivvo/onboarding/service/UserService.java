@@ -6,7 +6,6 @@ import com.vivvo.onboarding.controller.PhoneController;
 import com.vivvo.onboarding.entity.User;
 import com.vivvo.onboarding.exception.NotFoundException;
 import com.vivvo.onboarding.exception.ValidationException;
-import com.vivvo.onboarding.repository.PhoneRepository;
 import com.vivvo.onboarding.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
