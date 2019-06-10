@@ -16,7 +16,8 @@ public class PhoneAssembler {
                 .setUserId(entity.getUserId())
                 .setPhoneNumber(entity.getPhoneNumber())
                 .setVerified(entity.isVerified())
-                .setPrimary(entity.isPrimary());
+                .setPrimary(entity.isPrimary())
+                .setVerificationLink(entity.getVerificationLink());
     }
 
     public Phone disassemble(PhoneDto dto) {
@@ -25,7 +26,8 @@ public class PhoneAssembler {
                 .setUserId(dto.getUserId())
                 .setPhoneNumber(dto.getPhoneNumber())
                 .setVerified(dto.isVerified())
-                .setPrimary(dto.isPrimary());
+                .setPrimary(dto.isPrimary())
+                .setVerificationLink(dto.getVerificationLink());
     }
 
 }

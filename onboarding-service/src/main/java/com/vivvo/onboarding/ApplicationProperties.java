@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Data
 public class ApplicationProperties {
 
-    private TwilioProperties twilio = new TwilioProperties();
+    public TwilioProperties twilio = new TwilioProperties();
 
     @Data
     public static class TwilioProperties {

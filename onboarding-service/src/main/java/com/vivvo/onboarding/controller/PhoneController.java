@@ -53,4 +53,7 @@ public class PhoneController {
     @GetMapping("/{phoneId}/verifyPhone")
     public void verifyPhone(@PathVariable UUID userId, @PathVariable UUID phoneId) { phoneService.verifyPhone(userId, phoneId); }
 
+    @GetMapping("/{phoneId}/{verifyLink}")
+    public void verify(@PathVariable UUID userId, @PathVariable UUID phoneId, @PathVariable String verifyLink) { phoneService.verifyPhone(userId, phoneId, verifyLink); }
+
 }

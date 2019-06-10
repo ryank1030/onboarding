@@ -17,5 +17,6 @@ public class PhoneDto {
     private String phoneNumber;
     private boolean verified;
     private boolean primary;
+    private String verificationLink;
 
 }

@@ -12,6 +12,8 @@ import com.vivvo.onboarding.repository.UserRepository;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.ws.rs.BadRequestException;
 import java.security.SecureRandom;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -103,21 +105,38 @@ public class PhoneService {
     }
 
     public void verifyPhone(UUID userId, UUID phoneId) {
-        PhoneDto temp = get(userId, phoneId);
+        PhoneDto dto = get(userId, phoneId);
         SmsSender send = new SmsSender();
         SecureRandom rand = new SecureRandom();
         String link = "http://localhost:4444/api/v1/users/"
         + userId
         + "/phones/"
-        + phoneId;
+        + phoneId
+        + "/";
 
         for (int i = 0; i < 8; i++) {
             link += rand.nextInt(10);
         }
-        link += "/";
 
-        send.sendMessage(temp.getPhoneNumber(), link);
+        send.sendMessage(dto.getPhoneNumber(), link);
+        dto.setVerificationLink(link.substring(link.length() - 8));
+        Optional.of(dto)
+                .map(phoneAssembler::disassemble)
+                .map(phoneRepository::save)
+                .orElseThrow(() -> new NotFoundException(phoneId));
+    }
 
+    public void verifyPhone(UUID userId, UUID phoneId, String verifyLink) {
+        PhoneDto dto = get(userId, phoneId);
+        if (dto.getVerificationLink().equals(verifyLink)) {
+            dto.setVerified(true);
+            Optional.of(dto)
+                    .map(phoneAssembler::disassemble)
+                    .map(phoneRepository::save)
+                    .orElseThrow(BadRequestException::new);
+        } else {
+            throw new BadRequestException();
+        }
     }
 }
 

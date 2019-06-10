@@ -31,5 +31,7 @@ public class Phone {
     @Column(name = "user_id")
     @Type(type = "uuid-char")
     private UUID userId;
+    @Column(name = "verification_link")
+    private String verificationLink;
 
 }

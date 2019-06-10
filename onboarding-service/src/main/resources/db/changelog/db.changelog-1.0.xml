@@ -17,6 +17,7 @@
 			<column name="verified" type="boolean" />
 			<column name="primary" type="boolean" />
 			<column name="user_id" type="varchar(36)"/>
+			<column name="verification_link" type="varchar(36)"/>
 		</createTable>
 	</changeSet>
 
