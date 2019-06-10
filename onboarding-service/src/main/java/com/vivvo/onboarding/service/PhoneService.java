@@ -1,5 +1,6 @@
 package com.vivvo.onboarding.service;
 
+import com.twilio.twiml.voice.Sms;
 import com.vivvo.onboarding.PhoneDto;
 import com.vivvo.onboarding.UserDto;
 import com.vivvo.onboarding.entity.Phone;
@@ -8,9 +9,10 @@ import com.vivvo.onboarding.exception.NotFoundException;
 import com.vivvo.onboarding.exception.ValidationException;
 import com.vivvo.onboarding.repository.PhoneRepository;
 import com.vivvo.onboarding.repository.UserRepository;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import java.security.SecureRandom;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -98,6 +100,24 @@ public class PhoneService {
                         .orElseThrow(IllegalArgumentException::new);
             }
         }
+    }
+
+    public void verifyPhone(UUID userId, UUID phoneId) {
+        PhoneDto temp = get(userId, phoneId);
+        SmsSender send = new SmsSender();
+        SecureRandom rand = new SecureRandom();
+        String link = "http://localhost:4444/api/v1/users/"
+        + userId
+        + "/phones/"
+        + phoneId;
+
+        for (int i = 0; i < 8; i++) {
+            link += rand.nextInt(10);
+        }
+        link += "/";
+
+        send.sendMessage(temp.getPhoneNumber(), link);
+
     }
 }
 

@@ -50,4 +50,7 @@ public class PhoneController {
     @PutMapping("/{phoneId}/makePrimary")
     public void makePrimary(@PathVariable UUID userId, @PathVariable UUID phoneId) { phoneService.makePrimary(userId, phoneId); }
 
+    @GetMapping("/{phoneId}/verifyPhone")
+    public void verifyPhone(@PathVariable UUID userId, @PathVariable UUID phoneId) { phoneService.verifyPhone(userId, phoneId); }
+
 }

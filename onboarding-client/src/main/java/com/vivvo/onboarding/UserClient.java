@@ -1,7 +1,6 @@
 package com.vivvo.onboarding;
 
 import lombok.Setter;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
