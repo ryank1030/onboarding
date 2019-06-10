@@ -21,14 +21,7 @@ public class UserController {
     private UserService userService;
 
     @GetMapping
-    public List<UserDto> find() {
-        return Collections.singletonList(new UserDto()
-            .setFirstName("Tim")
-            .setLastName("Dodd")
-            .setUserId(UUID.randomUUID())
-            .setUsername("doddt"));
-
-    }
+    public List<UserDto> get() { return userService.get(); }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)

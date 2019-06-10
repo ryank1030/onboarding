@@ -77,6 +77,19 @@ public class UserService {
                 .orElseThrow(() -> new NotFoundException(userId));
     }
 
+    public List<UserDto> get() {
+        //get the list of users
+        //pull the userId from each user
+        //search for phones based on the userId
+        //return the list
+        List<UserDto> temp = userRepository.findAll()
+                .stream()
+                .map(userAssembler::assemble)
+                .collect(Collectors.toList());
+
+        return temp;
+    }
+
     public void delete(UUID userId) {
         Optional<User> user = userRepository.findById(userId);
         if (user.isPresent()) {
