@@ -6,6 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,20 +26,20 @@ public class PhoneValidator {
     public static String PHONE_LT_16 = "phone.primary.LT_16";
     public static String INVALID_PHONE = "phone.INVALID";
     public static String PHONE_DUPLICATE = "phone.DUPLICATE";
-    public static String PHONE__ALREADY_EXISTS = "phone.already.EXISTS";
+    public static String PHONE_ALREADY_EXISTS = "phone.already.EXISTS";
     public static String VERIFY_EMPTY = "phone.verify.EMPTY";
 
     public Map<String, String> validate(PhoneDto dto) {
         Map<String, String> errors = new LinkedHashMap<>();
         errors.putAll(validatePhoneNumber(dto));
-        //errors.putAll(validatePhoneNumberNotStored(dto));
+        errors.putAll(validatePhoneNumberNotStored(dto));
         return errors;
     }
 
     public Map<String, String> validateForUpdate(PhoneDto dto) {
         Map<String, String> errors = new LinkedHashMap<>();
         errors.putAll(validatePhoneNumber(dto));
-        //errors.putAll(validatePhoneNumberNotStored(dto));
+        errors.putAll(validatePhoneNumberNotStored(dto));
         return errors;
     }
 
@@ -90,16 +91,19 @@ public class PhoneValidator {
     }
 
 
-    /*private Map<String, String> validatePhoneNumberNotStored(PhoneDto dto) {
+    private Map<String, String> validatePhoneNumberNotStored(PhoneDto dto) {
         Map<String, String> errors = new LinkedHashMap<>();
-        if (phoneService.get(dto.getUserId()) != null) {
-            for (PhoneDto p_dto : phoneService.get(dto.getUserId())) {
-                if (p_dto.getPhoneNumber() == dto.getPhoneNumber()) {
-                    errors.put("phoneNumber", PHONE__ALREADY_EXISTS);
+        if(dto.getUserId() != null) {  //using this to break when running validator tests | passed value should always have userId set
+            List<PhoneDto> dtos = phoneService.getList(dto.getUserId());
+            if (!dtos.isEmpty()) {
+                for (PhoneDto p_dto : dtos) {
+                    if (p_dto.getPhoneNumber().equals(dto.getPhoneNumber())) {
+                        errors.put("phoneNumber", PHONE_ALREADY_EXISTS);
+                    }
                 }
             }
         }
         return errors;
-    }*/
+    }
 
 }

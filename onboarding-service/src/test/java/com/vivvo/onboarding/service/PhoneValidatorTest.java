@@ -85,7 +85,6 @@ public class PhoneValidatorTest {
 
     private PhoneDto getValidPhoneDto() {
         return new PhoneDto()
-                .setUserId(UUID.randomUUID())
                 .setPhoneId(UUID.randomUUID())
                 .setPhoneNumber("1112223333")
                 .setPrimary(true)

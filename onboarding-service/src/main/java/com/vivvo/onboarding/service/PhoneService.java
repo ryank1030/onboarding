@@ -36,14 +36,15 @@ public class PhoneService {
     private ApplicationProperties applicationProperties;
 
     public PhoneDto create(UUID userId, PhoneDto dto) {
+        dto.setVerified(false);
+        dto.setPrimary(false);
+        dto.setUserId(userId);
+
         Map<String, String> errors = phoneValidator.validate(dto);
         if (!errors.isEmpty()) {
             throw new ValidationException(errors);
         }
 
-        dto.setVerified(false);
-        dto.setPrimary(false);
-        dto.setUserId(userId);
 
         return Optional.of(dto)
                 .map(phoneAssembler::disassemble)
@@ -69,6 +70,7 @@ public class PhoneService {
     }
 
     public PhoneDto update(UUID userId, PhoneDto dto) {
+        dto.setUserId(userId);
         Map<String, String> errors = phoneValidator.validateForUpdate(dto);
         if (!errors.isEmpty()) {
             throw new ValidationException(errors);
