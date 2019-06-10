@@ -50,20 +50,22 @@ public class PhoneControllerTest {
 
     @Test
     public void testCreateAndGetById_shouldSucceed() {
-        //create the user and the phone
         UserDto createdUser = getValidUserDto();
         PhoneDto createdPhone = createdUser.getPhones().get(0);
-
-        //call the create phone method returns phoneDto
         createdPhone = userClient.create(createdPhone, createdPhone.getUserId());
-
-        //Get the phoneDto from the database
         PhoneDto dto = userClient.getPhone(createdPhone.getPhoneId(), createdPhone.getUserId());
-
-        //compare the two
         assertEquals(dto, createdPhone);
     }
 
+    @Test
+    public void testCreateAndMakePhonePrimary_shouldSucceed(){
+        UserDto createdUser = getValidUserDto();
+        PhoneDto createdPhone = createdUser.getPhones().get(0);
+        createdPhone = userClient.create(createdPhone, createdPhone.getUserId());
+        userClient.makePrimary(createdPhone.getPhoneId(), createdPhone.getUserId());
+        PhoneDto dto = userClient.getPhone(createdPhone.getPhoneId(), createdPhone.getUserId());
+        assertTrue(dto.isPrimary());
+    }
     /*
     @Test
     public void testCreateAndDeletePhone_shouldSucceed() {
@@ -89,7 +91,7 @@ public class PhoneControllerTest {
                 .setPhoneId(UUID.randomUUID())
                 .setPhoneNumber("1112223333")
                 .setVerified(true)
-                .setPrimary(true);
+                .setPrimary(false);
     }
 
 }

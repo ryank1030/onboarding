@@ -94,6 +94,13 @@ public class UserClient {
                 .get(PhoneDto.class);
     }
 
+    public void makePrimary(UUID phoneId, UUID userId) {
+        phoneTarget(phoneId, userId)
+                .path("makePrimary")
+                .request()
+                .put(Entity.json(userId), void.class);
+    }
+
     /*
     public void delete(UUID phoneId, UUID userId) {
         phoneTarget(phoneId, userId)

@@ -70,14 +70,21 @@ public class PhoneService {
                 .orElseThrow(IllegalArgumentException::new);
     }
 
-    public PhoneDto get(UUID phoneId) {
-        return phoneRepository.findById(phoneId)
+    public PhoneDto get(UUID userId, UUID phoneId) {
+        PhoneDto temp = phoneRepository.findById(phoneId)
                 .map(phoneAssembler::assemble)
                 .orElseThrow(() -> new NotFoundException(phoneId));
+        /*
+        if(temp.getUserId() != userId) {
+            throw(new NotFoundException(phoneId));
+        }
+
+         */
+        return temp;
     }
 
-    public void makePrimary(UUID phoneId) {
-        List<PhoneDto> dtos = getList(get(phoneId).getUserId());
+    public void makePrimary(UUID userId, UUID phoneId) {
+        List<PhoneDto> dtos = getList(userId);
         for(PhoneDto dto : dtos) {
             if (dto.getPhoneId().equals(phoneId)) {
                 Optional.of(dto.setPrimary(true))
