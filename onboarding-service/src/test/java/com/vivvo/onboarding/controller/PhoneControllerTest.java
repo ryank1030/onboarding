@@ -9,6 +9,7 @@ import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import javax.ws.rs.NotFoundException;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
@@ -66,14 +67,15 @@ public class PhoneControllerTest {
         PhoneDto dto = userClient.getPhone(createdPhone.getPhoneId(), createdPhone.getUserId());
         assertTrue(dto.isPrimary());
     }
-    /*
-    @Test
+
+    @Test(expected = NotFoundException.class)
     public void testCreateAndDeletePhone_shouldSucceed() {
-        PhoneDto createdPhone = getValidPhoneDto();
+        UserDto createdUser = getValidUserDto();
+        PhoneDto createdPhone = createdUser.getPhones().get(0);
         createdPhone = userClient.create(createdPhone, createdPhone.getUserId());
-        assertNull(createdPhone.delete(createdPhone.getPhoneId(), createdPhone.getUserId()));
+        userClient.delete(createdPhone.getPhoneId(), createdPhone.getUserId());
+        userClient.getPhone(createdPhone.getPhoneId(), createdPhone.getUserId());
     }
-     */
 
     private UserDto getValidUserDto() {
         UUID temp = UUID.randomUUID();

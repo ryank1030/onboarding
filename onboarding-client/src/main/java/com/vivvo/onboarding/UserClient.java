@@ -101,13 +101,11 @@ public class UserClient {
                 .put(Entity.json(userId), void.class);
     }
 
-    /*
     public void delete(UUID phoneId, UUID userId) {
         phoneTarget(phoneId, userId)
                 .request()
                 .delete(Void.class);
     }
-     */
 
     private WebTarget phoneTarget(UUID userId) {
         return userTarget()
