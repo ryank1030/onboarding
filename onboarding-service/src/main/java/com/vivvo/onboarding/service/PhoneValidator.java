@@ -26,8 +26,16 @@ public class PhoneValidator {
     public static String INVALID_PHONE = "phone.INVALID";
     public static String PHONE_DUPLICATE = "phone.DUPLICATE";
     public static String PHONE__ALREADY_EXISTS = "phone.already.EXISTS";
+    public static String VERIFY_EMPTY = "phone.verify.EMPTY";
 
     public Map<String, String> validate(PhoneDto dto) {
+        Map<String, String> errors = new LinkedHashMap<>();
+        errors.putAll(validatePhoneNumber(dto));
+        //errors.putAll(validatePhoneNumberNotStored(dto));
+        return errors;
+    }
+
+    public Map<String, String> validateForUpdate(PhoneDto dto) {
         Map<String, String> errors = new LinkedHashMap<>();
         errors.putAll(validatePhoneNumber(dto));
         //errors.putAll(validatePhoneNumberNotStored(dto));
@@ -69,6 +77,14 @@ public class PhoneValidator {
                     errors.put("phoneNumber", PHONE_DUPLICATE);
                 }
             }
+        }
+        return errors;
+    }
+
+    public Map<String, String> validateLink(PhoneDto dto) {
+        Map<String, String> errors = new LinkedHashMap<>();
+        if (dto.getVerificationLink() == null) {
+            errors.put("verificationLink", VERIFY_EMPTY);
         }
         return errors;
     }

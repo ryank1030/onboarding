@@ -22,8 +22,8 @@ public class PhoneController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public PhoneDto create(@RequestBody PhoneDto dto) {
-        return phoneService.create(dto);
+    public PhoneDto create(@PathVariable UUID userId, @RequestBody PhoneDto dto) {
+        return phoneService.create(userId, dto);
     }
 
     @GetMapping
@@ -37,9 +37,9 @@ public class PhoneController {
     public void delete(@PathVariable UUID phoneId) { phoneService.delete(phoneId); }
 
     @PutMapping("/{phoneId}")
-    public PhoneDto update(@PathVariable UUID phoneId, @RequestBody PhoneDto dto) {
+    public PhoneDto update(@PathVariable UUID userId, @PathVariable UUID phoneId, @RequestBody PhoneDto dto) {
         dto.setPhoneId(phoneId);
-        return phoneService.update(dto);
+        return phoneService.update(userId, dto);
     }
 
     @PutMapping("/{phoneId}/makePrimary")
@@ -50,5 +50,4 @@ public class PhoneController {
 
     @GetMapping("/{phoneId}/{verifyLink}")
     public void verify(@PathVariable UUID userId, @PathVariable UUID phoneId, @PathVariable String verifyLink) { phoneService.verifyPhone(userId, phoneId, verifyLink); }
-
 }
