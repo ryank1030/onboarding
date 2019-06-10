@@ -35,11 +35,15 @@ public class PhoneService {
     @Autowired
     private ApplicationProperties applicationProperties;
 
-    public PhoneDto create(PhoneDto dto) {
+    public PhoneDto create(UUID userId, PhoneDto dto) {
         Map<String, String> errors = phoneValidator.validate(dto);
         if (!errors.isEmpty()) {
             throw new ValidationException(errors);
         }
+
+        dto.setVerified(false);
+        dto.setPrimary(false);
+        dto.setUserId(userId);
 
         return Optional.of(dto)
                 .map(phoneAssembler::disassemble)
@@ -64,15 +68,16 @@ public class PhoneService {
         }
     }
 
-    public PhoneDto update(PhoneDto dto) {
-        /*
+    public PhoneDto update(UUID userId, PhoneDto dto) {
         Map<String, String> errors = phoneValidator.validateForUpdate(dto);
         if (!errors.isEmpty()) {
             throw new ValidationException(errors);
         }
-         */
 
-        return Optional.of(dto)
+        PhoneDto temp = get(userId, dto.getPhoneId());
+        temp.setPhoneNumber(dto.getPhoneNumber());
+
+        return Optional.of(temp)
                 .map(phoneAssembler::disassemble)
                 .map(phoneRepository::save)
                 .map(phoneAssembler::assemble)
@@ -83,12 +88,10 @@ public class PhoneService {
         PhoneDto temp = phoneRepository.findById(phoneId)
                 .map(phoneAssembler::assemble)
                 .orElseThrow(() -> new NotFoundException(phoneId));
-        /*
-        if(temp.getUserId() != userId) {
+
+        if(!temp.getUserId().equals(userId)) {
             throw(new NotFoundException(phoneId));
         }
-
-         */
         return temp;
     }
 
@@ -132,6 +135,11 @@ public class PhoneService {
 
     public void verifyPhone(UUID userId, UUID phoneId, String verifyLink) {
         PhoneDto dto = get(userId, phoneId);
+        Map<String, String> errors = phoneValidator.validateLink(dto);
+        if (!errors.isEmpty()) {
+            throw new ValidationException(errors);
+        }
+
         if (dto.getVerificationLink().equals(verifyLink)) {
             dto.setVerified(true);
             Optional.of(dto)
@@ -144,7 +152,6 @@ public class PhoneService {
     }
 
     public void sendMessage(String phone, String link) {
-
         Twilio.init(applicationProperties.getTwilio().getAccountSID(), applicationProperties.getTwilio().getAuthToken());
 
         Message message = Message
@@ -152,9 +159,6 @@ public class PhoneService {
                         new PhoneNumber("+16475603984"), // from
                         link)
                 .create();
-
-        System.out.println("SMS verification: " + message.getSid() + " link: " + link);
-
     }
 }
 

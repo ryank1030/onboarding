@@ -33,9 +33,7 @@ public class UserService {
 
     public UserDto create(UserDto dto) {
         Map<String, String> errors = userValidator.validate(dto);
-
         errors.putAll(phoneValidator.validateList(dto.getPhones()));
-
         if (!errors.isEmpty()) {
             throw new ValidationException(errors);
         }
@@ -49,11 +47,9 @@ public class UserService {
         List<PhoneDto> phones = new ArrayList<>();
         for (PhoneDto p_dto : dto.getPhones()) {
             p_dto.setUserId(user.getUserId());
-            phones.add(phoneController.create(p_dto));
+            phones.add(phoneController.create(user.getUserId(), p_dto));
         }
         user.setPhones(phones);
-
-
         return user;
     }
 
@@ -71,16 +67,15 @@ public class UserService {
     }
 
     public UserDto get(UUID userId) {
-        return userRepository.findById(userId)
+        UserDto dto = userRepository.findById(userId)
                 .map(userAssembler::assemble)
                 .orElseThrow(() -> new NotFoundException(userId));
+
+        List<PhoneDto> dtos = phoneController.getList(userId);
+        return dto;
     }
 
     public List<UserDto> get() {
-        //get the list of users
-        //pull the userId from each user
-        //search for phones based on the userId
-        //return the list
         List<UserDto> temp = userRepository.findAll()
                 .stream()
                 .map(userAssembler::assemble)
