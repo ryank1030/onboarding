@@ -63,7 +63,7 @@ public class UserClient {
     }
 
     private WebTarget userTarget() {
-        return client.target(baseUri)
+        return client.target("http://localhost:4444")
                 .path("api")
                 .path("v1")
                 .path("users");
