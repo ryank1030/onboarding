@@ -15,9 +15,9 @@ public interface UserRepository extends JpaRepository<User, UUID> {
     //fname we don't generally abbreviate. It usually leaves the next developer guessing. particularily when you get into
     //business names. One i just ran into yesterday was someone that abbreviated prodFeat. I initially thought prod was 'production'
     //so was thinking it was production feature. but it is actually product feature.
-    List<User> findByFirstName(String fname);
+    List<User> findByFirstName(String firstName);
 
-    List<User> findByLastName(String lname);
+    List<User> findByLastName(String lastName);
 
 }
 
