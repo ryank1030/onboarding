@@ -44,14 +44,14 @@ public class UserClient {
                 .get(UserDto.class);
     }
 
-    public List<UserDto> findByFirstName(String fname) {
-        return userTarget("firstName", fname)
+    public List<UserDto> findByFirstName(String firstName) {
+        return userTarget("firstName", firstName)
                 .request()
                 .get(new GenericType<List<UserDto>>(){});
     }
 
-    public List<UserDto> findByLastName(String lname) {
-        return userTarget("lastName", lname)
+    public List<UserDto> findByLastName(String lastName) {
+        return userTarget("lastName", lastName)
                 .request()
                 .get(new GenericType<List<UserDto>>(){});  //Don't understand this
     }

@@ -93,15 +93,15 @@ public class UserService {
         }
     }
 
-    public List<UserDto> findByFirstName(String fname){
-        return userRepository.findByFirstName(fname)
+    public List<UserDto> findByFirstName(String firstName){
+        return userRepository.findByFirstName(firstName)
                 .stream()
                 .map(userAssembler::assemble)
                 .collect(Collectors.toList());
     }
 
-    public List<UserDto> findByLastName(String lname){
-        return userRepository.findByLastName(lname)
+    public List<UserDto> findByLastName(String lastName){
+        return userRepository.findByLastName(lastName)
                 .stream()
                 .map(userAssembler::assemble)
                 .collect(Collectors.toList());
