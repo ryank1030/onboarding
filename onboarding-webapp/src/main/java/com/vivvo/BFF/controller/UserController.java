@@ -1,31 +1,28 @@
-package com.vivvo.onboarding.controller;
-
+package com.vivvo.BFF.controller;
+import com.vivvo.onboarding.UserClient;
 import com.vivvo.onboarding.UserDto;
-import com.vivvo.onboarding.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.UUID;
+
 
 @RestController
 @RequestMapping("/api/v1/users")
 public class UserController {
 
     @Autowired
-    private UserService userService;
-
-    @Autowired
     private UserClient userClient;
 
     @GetMapping
-    public List<UserDto> get() { return userService.get(); }
+    public List<UserDto> get() { return userClient.get(); }
 
+    /*
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public UserDto create(@RequestBody UserDto dto) {
-        return userService.create(dto);
+        return userClient.create(dto);
     }
 
     @GetMapping("/{userId}")
@@ -54,4 +51,6 @@ public class UserController {
     public List<UserDto> findByLastName(@RequestParam String lastName) {
         return userService.findByLastName(lastName);
     }
+
+     */
 }

@@ -1,8 +1,7 @@
-package com.vivvo.onboarding.controller;
+package com.vivvo.BFF.controller;
 
 import com.vivvo.onboarding.PhoneDto;
-import com.vivvo.onboarding.service.PhoneService;
-import com.vivvo.onboarding.service.UserService;
+import com.vivvo.onboarding.UserClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -15,11 +14,9 @@ import java.util.UUID;
 public class PhoneController {
 
     @Autowired
-    private PhoneService phoneService;
+    private UserClient userClient;
 
-    @Autowired
-    private UserService userService;
-
+    /*
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public PhoneDto create(@PathVariable UUID userId, @RequestBody PhoneDto dto) {
@@ -50,4 +47,6 @@ public class PhoneController {
 
     @GetMapping("/{phoneId}/{verifyLink}")
     public void verify(@PathVariable UUID userId, @PathVariable UUID phoneId, @PathVariable String verifyLink) { phoneService.verifyPhone(userId, phoneId, verifyLink); }
+    */
 }
+

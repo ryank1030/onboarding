@@ -26,6 +26,12 @@ public class UserClient {
                 .post(Entity.json(dto), UserDto.class);
     }
 
+    public List<UserDto> get() {
+        return userTarget()
+                .request()
+                .get(new GenericType<List<UserDto>>(){});
+    }
+
     public UserDto update(UserDto dto) {
         return userTarget(dto.getUserId())
                 .request()
