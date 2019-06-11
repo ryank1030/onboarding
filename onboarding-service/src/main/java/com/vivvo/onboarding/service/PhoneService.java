@@ -116,23 +116,28 @@ public class PhoneService {
 
     public void verifyPhone(UUID userId, UUID phoneId) {
         PhoneDto dto = get(userId, phoneId);
-        SecureRandom rand = new SecureRandom();
-        String link = "http://localhost:4444/api/v1/users/"
-        + userId
-        + "/phones/"
-        + phoneId
-        + "/";
 
-        for (int i = 0; i < 8; i++) {
-            link += rand.nextInt(10);
-        }
+//String concatenation is a little hard to read also you're building the string in multiple steps which is a little
+//hard to reason about
 
+        String pin = generatePin(8);
+        String link = String.format("http://localhost:4444/api/v1/users/%s/phones/%s/%s", userId, phoneId, pin);
         sendMessage(dto.getPhoneNumber(), link);
-        dto.setVerificationLink(link.substring(link.length() - 8));
+        dto.setVerificationLink(pin);
         Optional.of(dto)
                 .map(phoneAssembler::disassemble)
                 .map(phoneRepository::save)
                 .orElseThrow(() -> new NotFoundException(phoneId));
+    }
+
+    //i might make a utility class for something like this. probably other things in your app generate pins
+    private String generatePin(int length) {
+        SecureRandom random = new SecureRandom();
+        String pin = "";
+        for (int i = 0; i < length; i++) {
+            pin += random.nextInt(10);
+        }
+        return pin;
     }
 
     public void verifyPhone(UUID userId, UUID phoneId, String verifyLink) {
@@ -156,7 +161,8 @@ public class PhoneService {
     public void sendMessage(String phone, String link) {
         Twilio.init(applicationProperties.getTwilio().getAccountSID(), applicationProperties.getTwilio().getAuthToken());
 
-        Message message = Message
+        //removed unused variable
+        Message
                 .creator(new PhoneNumber(phone), // to
                         new PhoneNumber("+16475603984"), // from
                         link)

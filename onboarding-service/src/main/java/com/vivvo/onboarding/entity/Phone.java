@@ -24,6 +24,8 @@ public class Phone {
     private UUID phoneId;
     @Column(name = "phone_number")
     private String phoneNumber;
+
+    //By default this will save this in the database as a 1 or 0 which is fine. just as an FYI
     @Column(name = "verified")
     private boolean verified;
     @Column(name = "primary")

@@ -4,6 +4,9 @@
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
 
+	<!--You have both changes in a single changeSet. If the first createTable were to succeed and the second were to fail the changeset as a whole would be marked as failed. But if you tried to rerun it, it would fail on the FIRST table create the second time you ran it because now that table exists.-->
+
+	<!--https://www.liquibase.org/bestpractices.html-->
 	<changeSet author="doddt" id="create-user-table">
 		<createTable tableName="user">
 			<column name="user_id" type="varchar(36)"/>
