@@ -3,9 +3,11 @@ import com.vivvo.onboarding.UserClient;
 import com.vivvo.onboarding.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 
 @RestController
@@ -15,42 +17,50 @@ public class UserController {
     @Autowired
     private UserClient userClient;
 
+    //working
     @GetMapping
     public List<UserDto> get() { return userClient.get(); }
 
-    /*
+    //broken
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public UserDto create(@RequestBody UserDto dto) {
         return userClient.create(dto);
     }
 
+    //working
     @GetMapping("/{userId}")
     public UserDto get(@PathVariable UUID userId) {
-        return userService.get(userId);
+        return userClient.get(userId);
     }
 
+    //working
     @DeleteMapping("/{userId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable UUID userId) {
-        userService.delete(userId);
+        userClient.delete(userId);
     }
 
+    //working
     @PutMapping("/{userId}")
     public UserDto update(@PathVariable UUID userId, @RequestBody UserDto dto) {
         dto.setUserId(userId);
-        return userService.update(dto);
+        return userClient.update(dto);
     }
 
+    //working
     @GetMapping(params = "firstName")
     public List<UserDto> findByFirstName(@RequestParam String firstName) {
-        return userService.findByFirstName(firstName);
+        return userClient.findByFirstName(firstName);
     }
 
+    //working
     @GetMapping(params = "lastName")
     public List<UserDto> findByLastName(@RequestParam String lastName) {
-        return userService.findByLastName(lastName);
+        return userClient.findByLastName(lastName);
     }
 
-     */
+
+
+
 }

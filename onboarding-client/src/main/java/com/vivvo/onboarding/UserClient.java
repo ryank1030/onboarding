@@ -14,7 +14,7 @@ public class UserClient {
 
     private Client client;
     @Setter
-    private String baseUri;
+    private String baseUri = "http://localhost:4444";
 
     public UserClient() {
         this.client = ClientBuilder.newClient();
@@ -63,7 +63,7 @@ public class UserClient {
     }
 
     private WebTarget userTarget() {
-        return client.target("http://localhost:4444")
+        return client.target(baseUri)
                 .path("api")
                 .path("v1")
                 .path("users");
