@@ -5,6 +5,7 @@ import com.twilio.rest.api.v2010.account.Message;
 import com.twilio.type.PhoneNumber;
 import com.vivvo.onboarding.ApplicationProperties;
 import com.vivvo.onboarding.PhoneDto;
+import com.vivvo.onboarding.Utility;
 import com.vivvo.onboarding.entity.Phone;
 import com.vivvo.onboarding.exception.NotFoundException;
 import com.vivvo.onboarding.exception.ValidationException;
@@ -13,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.ws.rs.BadRequestException;
-import java.security.SecureRandom;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -119,8 +119,8 @@ public class PhoneService {
 
 //String concatenation is a little hard to read also you're building the string in multiple steps which is a little
 //hard to reason about
-
-        String pin = generatePin(8);
+        Utility util = new Utility();
+        String pin = util.generatePin(8);
         String link = String.format("http://localhost:4444/api/v1/users/%s/phones/%s/%s", userId, phoneId, pin);
         sendMessage(dto.getPhoneNumber(), link);
         dto.setVerificationLink(pin);
@@ -128,16 +128,6 @@ public class PhoneService {
                 .map(phoneAssembler::disassemble)
                 .map(phoneRepository::save)
                 .orElseThrow(() -> new NotFoundException(phoneId));
-    }
-
-    //i might make a utility class for something like this. probably other things in your app generate pins
-    private String generatePin(int length) {
-        SecureRandom random = new SecureRandom();
-        String pin = "";
-        for (int i = 0; i < length; i++) {
-            pin += random.nextInt(10);
-        }
-        return pin;
     }
 
     public void verifyPhone(UUID userId, UUID phoneId, String verifyLink) {
