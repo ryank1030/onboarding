@@ -84,9 +84,19 @@ public class UserService {
         return temp;
     }
 
+    //---not deleting phones in the phone database---//
+    //check to see if the user is in the database
+    //get the userId from the user
+    //get all the phones from the database with that userId
+    //delete all the phones
+    //delete the user
     public void delete(UUID userId) {
         Optional<User> user = userRepository.findById(userId);
         if (user.isPresent()) {
+            List<PhoneDto> dtos = phoneController.getList(userId);
+            for (PhoneDto dto : dtos) {
+                phoneController.delete(dto.getPhoneId());
+            }
             userRepository.delete(user.get());
         } else {
             throw new NotFoundException(userId);
