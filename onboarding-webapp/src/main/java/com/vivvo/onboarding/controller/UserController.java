@@ -16,6 +16,9 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private UserClient userClient;
+
     @GetMapping
     public List<UserDto> get() { return userService.get(); }
 
