@@ -1,0 +1,28 @@
+<!--
+  Data we need to store
+  User:
+   - Username
+   - First Name
+   - Last Name
+   - Phones:
+      - Phone Number
+-->
+<form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="username">Username</label>
+    <input type="text" class="form-control" formControlName="username" id="username" placeholder="Username">
+  </div>
+  <div class="form-group">
+    <label for="firstName">First name</label>
+    <input type="text" class="form-control" formControlName="firstName" id="firstName" placeholder="First name">
+  </div>
+  <div class="form-group">
+    <label for="lastName">Last name</label>
+    <input type="text" class="form-control" formControlName="lastName" id="lastName" placeholder="Last name">
+  </div>
+  <div class="form-group" formGroupName="phones">
+    <label for="phoneNumber">Phone Number</label>
+    <input type="number" class="form-control" formControlName="phoneNumber" id="phoneNumber" placeholder="13065194092">
+  </div>
+  <button type="submit" class="btn btn-primary" [disabled]="!profileForm.valid">Submit</button>
+</form>

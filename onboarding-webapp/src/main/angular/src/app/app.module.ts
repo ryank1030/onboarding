@@ -6,17 +6,21 @@ import { AppComponent } from './app.component';
 import { MainHeaderComponent } from './components/main-header/main-header.component';
 import { UserListComponent } from './components/user-list/user-list.component';
 import { HttpClientModule} from "@angular/common/http";
+import { UserAddComponent } from './components/user-add/user-add.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainHeaderComponent,
-    UserListComponent
+    UserListComponent,
+    UserAddComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
