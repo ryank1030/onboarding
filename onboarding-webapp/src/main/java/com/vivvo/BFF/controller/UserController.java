@@ -1,4 +1,5 @@
 package com.vivvo.BFF.controller;
+
 import com.vivvo.onboarding.UserClient;
 import com.vivvo.onboarding.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ public class UserController {
     @GetMapping
     public List<UserDto> get() { return userClient.get(); }
 
-    //broken
+    //working
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public UserDto create(@RequestBody UserDto dto) {
@@ -59,8 +60,5 @@ public class UserController {
     public List<UserDto> findByLastName(@RequestParam String lastName) {
         return userClient.findByLastName(lastName);
     }
-
-
-
 
 }

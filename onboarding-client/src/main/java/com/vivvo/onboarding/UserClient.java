@@ -79,6 +79,8 @@ public class UserClient {
                 .queryParam(param, name);
     }
 
+
+
     //--- Phone Actions ---//
 
     public PhoneDto create(PhoneDto dto, UUID userId) {
@@ -111,6 +113,39 @@ public class UserClient {
                 .request()
                 .delete(Void.class);
     }
+
+    public List<PhoneDto> getList(UUID userId) {
+        return phoneTarget(userId)
+                .request()
+                .get(new GenericType<List<PhoneDto>>(){});
+    }
+
+    public PhoneDto update(UUID userId, UUID phoneId, PhoneDto dto) {
+        return phoneTarget(phoneId, userId)
+                .request()
+                .put(Entity.json(dto), PhoneDto.class);
+    }
+
+    public PhoneDto get(UUID userId, UUID phoneId) {
+        return phoneTarget(phoneId, userId)
+                .request()
+                .get(PhoneDto.class);
+    }
+
+    public void verifyPhone(UUID userId, UUID phoneId){
+        phoneTarget(phoneId, userId)
+                .path("verifyPhone")
+                .request()
+                .get();
+    }
+
+    public void verifyPhone(UUID userId, UUID phoneId, String verifyLink){
+        phoneTarget(phoneId, userId)
+                .path(verifyLink)
+                .request()
+                .get();
+    }
+
 
     private WebTarget phoneTarget(UUID userId) {
         return userTarget()
