@@ -1,3 +1,4 @@
+import { Phone } from './../../models/phone';
 import { USER } from 'src/app/mock-data';
 import { Component, OnInit } from '@angular/core';
 import {User} from "../../models/user";
@@ -26,7 +27,17 @@ export class UserListComponent implements OnInit {
   }
 
   add() {
+    /*
     this.userService.addUser(this.testuser)
+    .subscribe(user => {
+      this.users.push(user);
+    });
+    */
+    this.addUser(null, 'uname2', 'fname2', 'lname2', this.testuser.phones);
+  }
+
+  addUser(userId: string, username: string, firstName: string, lastName: string, phones: Phone[]) {
+    this.userService.addUser({username, firstName, lastName, phones} as User)
     .subscribe(user => {
       this.users.push(user);
     });

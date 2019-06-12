@@ -1,3 +1,4 @@
+import { Phone } from './../models/phone';
 import { Injectable } from '@angular/core';
 import { User } from "../models/user";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
@@ -8,7 +9,7 @@ import {Observable, of} from "rxjs";
 })
 export class UserService {
 
-  private usersUrl = './api/v1/users'
+  private usersUrl = './api/v1/users';
 
   constructor(private http: HttpClient) { }
 

@@ -22,8 +22,8 @@ const PHONES: Phone[] = [
 
 export const USER: User = {
   userId: null,
-  username: 'username',
-  firstName: 'firstname',
-  lastName: 'lastname',
+  username: 'username2',
+  firstName: 'firstname2',
+  lastName: 'lastname2',
   phones: PHONES
   };
