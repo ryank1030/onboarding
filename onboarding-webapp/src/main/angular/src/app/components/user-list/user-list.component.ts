@@ -1,3 +1,4 @@
+import { USER } from 'src/app/mock-data';
 import { Component, OnInit } from '@angular/core';
 import {User} from "../../models/user";
 import {UserService} from "../../services/user.service";
@@ -10,6 +11,7 @@ import {UserService} from "../../services/user.service";
 export class UserListComponent implements OnInit {
 
   users: User[];
+  testuser: User = USER;
 
   constructor(private userService: UserService) {
   }
@@ -22,6 +24,14 @@ export class UserListComponent implements OnInit {
     this.userService.getUsers()
       .subscribe(users => this.users = users);
   }
+
+  add() {
+    this.userService.addUser(this.testuser)
+    .subscribe(user => {
+      this.users.push(user);
+    });
+  }
+
 }
 
 

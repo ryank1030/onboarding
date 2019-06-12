@@ -1,42 +1,29 @@
 import {Phone} from "./models/phone";
 import {User} from "./models/user";
 
-const PHONE: Phone = {
-  phoneId: '098',
-  userId: '123',
-  phoneNumber: '123456789',
-  verified: false,
-  primary: true,
-  verificationLink: '4654785'
-}
-
-export const USERS: User[] = [
+const PHONES: Phone[] = [
   {
-  userId: '123',
-  username: 'test',
-  firstName: 'first',
-  lastName: 'last',
-  phones: PHONE
+    phoneId: null,
+    userId: null,
+    phoneNumber: '123456789',
+    verified: false,
+    primary: false,
+    verificationLink: null
   },
   {
-    userId: '234',
-    username: 'test',
-    firstName: 'first',
-    lastName: 'last',
-    phones: PHONE
-  },
-  {
-    userId: '2435',
-    username: 'test',
-    firstName: 'first',
-    lastName: 'last',
-    phones: PHONE
-  },
-  {
-    userId: '634',
-    username: 'test',
-    firstName: 'first',
-    lastName: 'last',
-    phones: PHONE
+    phoneId: null,
+    userId: null,
+    phoneNumber: '098765213',
+    verified: false,
+    primary: false,
+    verificationLink: null
   }
-  ];
+];
+
+export const USER: User = {
+  userId: null,
+  username: 'username',
+  firstName: 'firstname',
+  lastName: 'lastname',
+  phones: PHONES
+  };
