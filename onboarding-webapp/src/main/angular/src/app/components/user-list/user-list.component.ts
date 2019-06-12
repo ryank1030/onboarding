@@ -27,16 +27,10 @@ export class UserListComponent implements OnInit {
   }
 
   add() {
-    /*
-    this.userService.addUser(this.testuser)
-    .subscribe(user => {
-      this.users.push(user);
-    });
-    */
-    this.addUser(null, 'uname2', 'fname2', 'lname2', this.testuser.phones);
+    this.addUser('uname3', 'fname2', 'lname2', this.testuser.phones);
   }
 
-  addUser(userId: string, username: string, firstName: string, lastName: string, phones: Phone[]) {
+  addUser(username: string, firstName: string, lastName: string, phones: Phone[]) {
     this.userService.addUser({username, firstName, lastName, phones} as User)
     .subscribe(user => {
       this.users.push(user);
