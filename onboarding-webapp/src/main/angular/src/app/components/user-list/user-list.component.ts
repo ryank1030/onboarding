@@ -12,7 +12,7 @@ import {UserService} from "../../services/user.service";
 export class UserListComponent implements OnInit {
 
   users: User[];
-  testuser: User = USER;
+  //testuser: User = USER;
 
   constructor(private userService: UserService) {
   }
@@ -26,9 +26,11 @@ export class UserListComponent implements OnInit {
       .subscribe(users => this.users = users);
   }
 
+  /*
   add() {
     this.addUser('uname3', 'fname2', 'lname2', this.testuser.phones);
   }
+  */
 
   addUser(username: string, firstName: string, lastName: string, phones: Phone[]) {
     this.userService.addUser({username, firstName, lastName, phones} as User)

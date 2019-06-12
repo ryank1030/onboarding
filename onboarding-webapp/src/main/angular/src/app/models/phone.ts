@@ -1,8 +1,8 @@
 export class Phone {
-  phoneId: String;
-  userId: String;
-  phoneNumber: String;
+  phoneId: string;
+  userId: string;
+  phoneNumber: string;
   verified: boolean;
   primary: boolean;
-  verificationLink: String;
+  verificationLink: string;
 }

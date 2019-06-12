@@ -45,18 +45,39 @@ export class UserAddComponent implements OnInit {
     return this.profileForm.get('lastName');
   }
 
-  get Phones() {
+  get phones() {
     return this.profileForm.get('phones');
   }
 
-  onSubmit() {
-    this.addUser(this.username.value, this.firstName.value, this.lastName.value, this.tempuser.phones);
+  get phoneNumber() {
+    return this.phones.get('phoneNumber');
   }
 
+  onSubmit() {
+    //this.addUser(this.username.value, this.firstName.value, this.lastName.value, this.tempuser.phones);
+    this.addUser(this.makeUser(this.username.value, this.firstName.value, this.lastName.value, this.makePhone(this.phoneNumber.value)));
+  }
+
+  makePhone(phoneNumber: string): Phone[] {
+    return [ { phoneNumber } as Phone ];
+  }
+
+  makeUser(username: string, firstName: string, lastName: string, phones: Phone[]): User {
+    return {username, firstName, lastName, phones} as User;
+  }
+
+  /*
   addUser(username: string, firstName: string, lastName: string, phones: Phone[]) {
     this.userService.addUser({username, firstName, lastName, phones} as User)
       .subscribe(user => {
         this.users.push(user);
     });
   }
+  */
+ addUser(u: User) {
+  this.userService.addUser(u)
+    .subscribe(user => {
+      this.users.push(user);
+  });
+}
 }
