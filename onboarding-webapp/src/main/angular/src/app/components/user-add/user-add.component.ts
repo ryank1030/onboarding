@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormArray } from '@angular/forms';
 import { User } from 'src/app/models/user';
 import { Phone } from 'src/app/models/phone';
@@ -13,16 +13,6 @@ import {UserService} from "../../services/user.service";
 
 export class UserAddComponent implements OnInit {
 
-  /*
-    Data we need to store
-  User:
-   - Username
-   - First Name
-   - Last Name
-   - Phones:
-      - Phone Number
-  */
-
   profileForm = this.fb.group({
     username: [''],
     firstName: [''],
@@ -32,7 +22,7 @@ export class UserAddComponent implements OnInit {
     }),
   });
 
-  users: any;
+  @Input() users: User[];
   tempuser: User = USER;
 
   constructor(
@@ -65,6 +55,8 @@ export class UserAddComponent implements OnInit {
 
   addUser(username: string, firstName: string, lastName: string, phones: Phone[]) {
     this.userService.addUser({username, firstName, lastName, phones} as User)
-      .subscribe();
+      .subscribe(user => {
+        this.users.push(user);
+    });
   }
 }
