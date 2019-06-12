@@ -1,15 +1,20 @@
 
-<table class="table table-striped table-dark">
-  <thead>
-    <th scope="col">#</th>
-    <th scope="col">First</th>
-    <th scope="col">Last</th>
-    <th scope="col">Phone</th>
+<table class="table table-sm table-hover">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">First</th>
+      <th scope="col">Last</th>
+      <th scope="col">Phone</th>
+    </tr>
   </thead>
-  <tbody *ngFor="let user of users">
-    <th scope="row">1</th>
-    <td>{{user.firstName}}</td>
-    <td>{{user.lastName}}</td>
-    <td>{{user.phones[0].phoneNumber}}</td>
+  <tbody>
+    <tr *ngFor="let user of users; let i = index">
+      <th scope="row">{{i+1}}</th>
+      <td>{{user.firstName}}</td>
+      <td>{{user.lastName}}</td>
+      <td>{{user.phones[0].phoneNumber}}</td>
+    </tr>
   </tbody>
 </table>
+<button class="btn btn-outline-primary btn-block">Add User</button>
