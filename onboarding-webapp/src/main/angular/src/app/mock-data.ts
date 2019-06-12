@@ -1,5 +1,5 @@
-import {Phone} from "./phone";
-import {User} from "./user";
+import {Phone} from "./models/phone";
+import {User} from "./models/user";
 
 const PHONE: Phone = {
   phoneId: '098',

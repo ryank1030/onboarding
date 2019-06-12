@@ -7,11 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainHeaderComponent implements OnInit {
 
+  title = 'Main Header';
+
   constructor() { }
 
   ngOnInit() {
   }
-
-  title = 'Main Header';
-
 }
