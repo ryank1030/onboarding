@@ -2,28 +2,27 @@
   <h5 class="card-header">
     User Details
   </h5>
-  <div class="card-body">
-    <h5 class="card-title">User ID: {{user.userId}}</h5>
-    <h5 class="card-title">Username: {{user.username}}</h5>
-    <h5 class="card-title">First Name: {{user.firstName}}</h5>
-    <h5 class="card-title">Last Name: {{user.lastName}}</h5>
-    <div *ngFor="let phone of user.phones; let i = index">
-      <h5 class="card-title">{{i+1}} Phone ID: {{phone.phoneId}}</h5>
-      <h5 class="card-title">{{i+1}} Phone Number: {{phone.phoneNumber}}</h5>
-      <h5 class="card-title">{{i+1}} Verified: {{phone.verified}}</h5>
-      <h5 class="card-title">{{i+1}} Primary: {{phone.primary}}</h5>
-      <h5 class="card-title">{{i+1}} Verification Link: {{phone.verificationLink}}</h5>
+  <div class="row">
+    <div class="card-body col-6">
+      <p class="card-title">Username: {{user.username}}</p>
+      <p class="card-title">First Name: {{user.firstName}}</p>
+      <p class="card-title">Last Name: {{user.lastName}}</p>
     </div>
-    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-    <a class="btn btn-danger" (click)="deleteUser()">Delete User</a>
+    <div class="card-body col-6">
+      <p class="card-title">User ID: {{user.userId}}</p>
+    </div>
   </div>
+  <div class="row" *ngFor="let phone of user.phones">
+    <div class="card-body col-6" >
+      <p class="card-title">Phone ID: {{phone.phoneId}}</p>
+      <p class="card-title">Phone Number: {{phone.phoneNumber}}</p>
+      <p class="card-title">Verified: {{phone.verified}}</p>
+      <p class="card-title">Primary: {{phone.primary}}</p>
+      <p class="card-title">Verification Link: {{phone.verificationLink}}</p>
+    </div>
+    <div class="card-body col-6">
+      <p class="card-title">Phone ID: {{phone.phoneId}}</p>
+    </div>
+  </div>
+  <a class="btn btn-danger" (click)="deleteUser()">Delete User</a>
 </div>
-{{user.userId}}
-{{user.username}}
-{{user.firstName}}
-{{user.lastName}}
-{{user.phones[0].phoneId}}
-{{user.phones[0].phoneNumber}}
-{{user.phones[0].verified}}
-{{user.phones[0].primary}}
-{{user.phones[0].verificationLink}}
