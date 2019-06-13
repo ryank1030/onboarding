@@ -1,3 +1,4 @@
+import { Phone } from 'src/app/models/phone';
 import { UserService } from './../../services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -11,6 +12,8 @@ import { User } from 'src/app/models/user';
 export class UserDetailsComponent implements OnInit {
 
   user: User;  //causing console errors for being undefined
+  phone: Phone;
+  toggle = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -34,4 +37,31 @@ export class UserDetailsComponent implements OnInit {
     this.router.navigate(['users']);
   }
 
+  deletePhone(phone: Phone) {
+    this.userService.deletePhone(this.user.userId, phone.phoneId)
+      .subscribe();//this isn't updating the user on the page
+  }
+
+  makePrimary(phone: Phone) {
+    this.userService.makePrimary(this.user.userId, phone.phoneId)
+      .subscribe();//this isn't updating the user on the page
+  }
+
+  verifyPhone(phone: Phone) {
+    this.userService.verifyPhone(this.user.userId, phone.phoneId)
+      .subscribe();//this isn't updating the user on the page
+  }
+
+  verify(phone: Phone) {
+    this.userService.verify(this.user.userId, phone.phoneId, phone.verificationLink)
+      .subscribe();//this isn't updating the user on the page
+  }
+
+  toggleAddPhone() {
+    this.toggle = !this.toggle;
+  }
+
+  receiveToggle($event) {
+    this.toggle = $event;
+  }
 }

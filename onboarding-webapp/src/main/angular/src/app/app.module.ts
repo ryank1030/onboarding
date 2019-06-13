@@ -9,6 +9,7 @@ import { HttpClientModule} from "@angular/common/http";
 import { UserAddComponent } from './components/user-add/user-add.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UserDetailsComponent } from './components/user-details/user-details.component';
+import { PhoneAddComponent } from './components/phone-add/phone-add.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { UserDetailsComponent } from './components/user-details/user-details.com
     MainHeaderComponent,
     UserListComponent,
     UserAddComponent,
-    UserDetailsComponent
+    UserDetailsComponent,
+    PhoneAddComponent
   ],
   imports: [
     BrowserModule,

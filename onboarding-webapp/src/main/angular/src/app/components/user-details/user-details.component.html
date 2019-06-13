@@ -22,7 +22,13 @@
     </div>
     <div class="card-body col-6">
       <p class="card-title">Phone ID: {{phone.phoneId}}</p>
+      <button type="button" class="btn btn-primary" (click)="makePrimary(phone)">Make Primary</button>
+      <button type="button" class="btn btn-primary" (click)="verifyPhone(phone)">Get Phone Verificaton Link</button>
+      <button type="button" class="btn btn-primary" (click)="verify(phone)">Apply Phone Verificaton Link</button>
+      <button type="button" class="btn btn-danger" (click)="deletePhone(phone)">Delete Number</button>
     </div>
   </div>
-  <a class="btn btn-danger" (click)="deleteUser()">Delete User</a>
+  <app-phone-add (toggleEvent)="receiveToggle($event)" [users]="users" [toggle]="toggle"></app-phone-add>
+  <button type="button" class="btn btn-primary" (click)="toggleAddPhone()" *ngIf="!toggle">Add Phone Number</button>
+  <button type="button" class="btn btn-danger" (click)="deleteUser()">Delete User</button>
 </div>

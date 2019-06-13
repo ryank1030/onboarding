@@ -25,8 +25,23 @@ export class UserService {
     return this.http.get<User>(this.usersUrl + '/' + id);
   }
 
-  deleteUser(id: string): Observable<any> {
-    return this.http.delete(this.usersUrl + '/' + id);
-    console.log(this.usersUrl + '/' + id);
+  deleteUser(userId: string): Observable<any> {
+    return this.http.delete(this.usersUrl + '/' + userId);
+  }
+
+  deletePhone(userId: string, phoneId: string): Observable<any> {
+    return this.http.delete(this.usersUrl + '/' + userId + '/phones/' + phoneId);
+  }
+
+  makePrimary(userId: string, phoneId: string): Observable<any> {
+    return this.http.put(this.usersUrl + '/' + userId + '/phones/' + phoneId + '/makePrimary', null);
+  }
+
+  verifyPhone(userId: string, phoneId: string): Observable<any> {
+    return this.http.get(this.usersUrl + '/' + userId + '/phones/' + phoneId + '/verifyPhone');
+  }
+
+  verify(userId: string, phoneId: string, link: string): Observable<any> {
+    return this.http.get(this.usersUrl + '/' + userId + '/phones/' + phoneId + '/' + link);
   }
 }
