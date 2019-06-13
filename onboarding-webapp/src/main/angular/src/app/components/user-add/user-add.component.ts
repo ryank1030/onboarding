@@ -1,9 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormArray } from '@angular/forms';
 import { User } from 'src/app/models/user';
 import { Phone } from 'src/app/models/phone';
 import { USER } from 'src/app/mock-data';
-import {UserService} from "../../services/user.service";
+import {UserService} from '../../services/user.service';
+import { EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-user-add',
@@ -23,7 +24,8 @@ export class UserAddComponent implements OnInit {
   });
 
   @Input() users: User[];
-  tempuser: User = USER;
+  @Input() toggle: boolean;
+  @Output() toggleEvent = new EventEmitter();
 
   constructor(
     private fb: FormBuilder,
@@ -53,31 +55,26 @@ export class UserAddComponent implements OnInit {
     return this.phones.get('phoneNumber');
   }
 
-  onSubmit() {
-    //this.addUser(this.username.value, this.firstName.value, this.lastName.value, this.tempuser.phones);
-    this.addUser(this.makeUser(this.username.value, this.firstName.value, this.lastName.value, this.makePhone(this.phoneNumber.value)));
-  }
-
-  makePhone(phoneNumber: string): Phone[] {
+  assemblePhone(phoneNumber: string): Phone[] {
     return [ { phoneNumber } as Phone ];
   }
 
-  makeUser(username: string, firstName: string, lastName: string, phones: Phone[]): User {
+  assembleUser(username: string, firstName: string, lastName: string, phones: Phone[]): User {
     return {username, firstName, lastName, phones} as User;
   }
 
-  /*
-  addUser(username: string, firstName: string, lastName: string, phones: Phone[]) {
-    this.userService.addUser({username, firstName, lastName, phones} as User)
+  onSubmit() {
+    this.addUser(
+      this.assembleUser(this.username.value, this.firstName.value, this.lastName.value, this.assemblePhone(this.phoneNumber.value))
+      );
+    this.toggle = !this.toggle;
+    this.toggleEvent.emit(this.toggle);
+  }
+
+  addUser(u: User) {
+    this.userService.addUser(u)
       .subscribe(user => {
         this.users.push(user);
     });
   }
-  */
- addUser(u: User) {
-  this.userService.addUser(u)
-    .subscribe(user => {
-      this.users.push(user);
-  });
-}
 }

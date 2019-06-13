@@ -3,6 +3,7 @@
   <thead class="thead-dark">
     <tr>
       <th scope="col">#</th>
+      <th scope="col">Username</th>
       <th scope="col">First</th>
       <th scope="col">Last</th>
       <th scope="col">Phone</th>
@@ -11,11 +12,13 @@
   <tbody>
     <tr *ngFor="let user of users; let i = index">
       <th scope="row">{{i+1}}</th>
+      <td>{{user.username}}</td>
       <td>{{user.firstName}}</td>
       <td>{{user.lastName}}</td>
       <td>{{user.phones[0].phoneNumber}}</td>
     </tr>
   </tbody>
 </table>
-<button class="btn btn-outline-primary btn-block" (click)="add()">Add User</button>
-<app-user-add [users]="users"></app-user-add>
+<button class="btn btn-outline-primary btn-block" (click)="toggleAddUser()" *ngIf="!toggle">Add User</button>
+{{message}}
+<app-user-add (toggleEvent)="receiveToggle($event)" [users]="users" [toggle]="toggle"></app-user-add>
