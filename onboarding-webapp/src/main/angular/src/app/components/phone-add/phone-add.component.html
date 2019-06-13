@@ -1,1 +1,7 @@
-<button type="button" class="btn btn-primary" *ngIf="toggle" (click)="toggleAddPhone()">Inside Add Phone Number</button>
+<form [formGroup]="profileForm" (ngSubmit)="onSubmit()" *ngIf="toggle">
+  <div class="form-group">
+    <label for="phoneNumber">Phone Number</label>
+    <input type="number" class="form-control" formControlName="phoneNumber" id="phoneNumber" placeholder="Phone Number">
+  </div>
+  <button type="submit" class="btn btn-primary" [disabled]="!profileForm.valid">Submit</button>
+</form>

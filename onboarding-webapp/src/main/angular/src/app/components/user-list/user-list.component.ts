@@ -48,7 +48,6 @@ export class UserListComponent implements OnInit {
 
   userClick(user: User) {
     this.router.navigate(['detail/' + user.userId]);
-    //pass the data to the user detail page
   }
 }
 

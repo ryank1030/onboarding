@@ -1,6 +1,9 @@
 import { Component, OnInit, Input, Output } from '@angular/core';
 import { EventEmitter } from '@angular/core';
 import { User } from 'src/app/models/user';
+import { UserService } from 'src/app/services/user.service';
+import { Phone } from 'src/app/models/phone';
+import { FormBuilder, FormControl, FormGroup, FormArray } from '@angular/forms';
 
 @Component({
   selector: 'app-phone-add',
@@ -9,18 +12,42 @@ import { User } from 'src/app/models/user';
 })
 export class PhoneAddComponent implements OnInit {
 
-  @Input() users: User[];
+  @Input() user: User;
   @Input() toggle: boolean;
   @Output() toggleEvent = new EventEmitter();
 
-  constructor() { }
+  profileForm = this.fb.group({
+      phoneNumber: ['']
+    });
+
+  constructor(
+    private userService: UserService,
+    private fb: FormBuilder,
+  ) { }
 
   ngOnInit() {
   }
 
-  toggleAddPhone() {
+  get phoneNumber() {
+    return this.profileForm.get('phoneNumber');
+  }
+
+  onSubmit() {
+    //this.addPhone(user);
+    console.log(this.assemblePhone(this.phoneNumber.value));
     this.toggle = !this.toggle;
     this.toggleEvent.emit(this.toggle);
   }
 
+  assemblePhone(phoneNumber: string): Phone {
+    return { phoneNumber } as Phone;
+  }
+
+  //testing//
+  addPhone() {
+    this.userService.addPhone(this.user.userId, phone)
+      .subscribe(phone => {
+        this.user.phones.push(phone);
+      });
+  }
 }

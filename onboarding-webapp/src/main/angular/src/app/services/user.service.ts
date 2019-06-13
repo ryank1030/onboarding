@@ -29,19 +29,31 @@ export class UserService {
     return this.http.delete(this.usersUrl + '/' + userId);
   }
 
+  addPhone(userId: string, phone: Phone): Observable<Phone> {////////
+    return this.http.post<Phone>(this.phoneUrl(userId), phone);
+  }
+
   deletePhone(userId: string, phoneId: string): Observable<any> {
-    return this.http.delete(this.usersUrl + '/' + userId + '/phones/' + phoneId);
+    return this.http.delete(this.phoneIdUrl(userId, phoneId));
   }
 
   makePrimary(userId: string, phoneId: string): Observable<any> {
-    return this.http.put(this.usersUrl + '/' + userId + '/phones/' + phoneId + '/makePrimary', null);
+    return this.http.put(this.phoneIdUrl(userId, phoneId) + '/makePrimary', null);
   }
 
   verifyPhone(userId: string, phoneId: string): Observable<any> {
-    return this.http.get(this.usersUrl + '/' + userId + '/phones/' + phoneId + '/verifyPhone');
+    return this.http.get(this.phoneIdUrl(userId, phoneId) + '/verifyPhone');
   }
 
   verify(userId: string, phoneId: string, link: string): Observable<any> {
-    return this.http.get(this.usersUrl + '/' + userId + '/phones/' + phoneId + '/' + link);
+    return this.http.get(this.phoneIdUrl(userId, phoneId) + '/' + link);
+  }
+
+  phoneUrl(userId: string): string {
+    return this.usersUrl + '/' + userId + '/phones';
+  }
+
+  phoneIdUrl(userId: string, phoneId: string): string {
+    return this.phoneUrl(userId) + '/' + phoneId;
   }
 }
