@@ -1,0 +1,22 @@
+<div class="card">
+  <h5 class="card-header">
+    User Details
+  </h5>
+  <div class="card-body">
+    <h5 class="card-title">User ID: {{user.userId}}</h5>
+    <h5 class="card-title">Username: {{user.username}}</h5>
+    <h5 class="card-title">First Name: {{user.firstName}}</h5>
+    <h5 class="card-title">Last Name: {{user.lastName}}</h5>
+    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+    <a class="btn btn-danger" (click)="deleteUser()">Delete User</a>
+  </div>
+</div>
+{{user.userId}}
+{{user.username}}
+{{user.firstName}}
+{{user.lastName}}
+{{user.phones[0].phoneId}}
+{{user.phones[0].phoneNumber}}
+{{user.phones[0].verified}}
+{{user.phones[0].primary}}
+{{user.phones[0].verificationLink}}

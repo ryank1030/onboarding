@@ -3,6 +3,7 @@ import { USER } from 'src/app/mock-data';
 import { Component, OnInit } from '@angular/core';
 import {User} from "../../models/user";
 import {UserService} from "../../services/user.service";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-list',
@@ -13,8 +14,12 @@ export class UserListComponent implements OnInit {
 
   users: User[];
   toggle = false;
+  test = '';
 
-  constructor(private userService: UserService) {
+  constructor(
+    private userService: UserService,
+    private router: Router
+    ) {
   }
 
   ngOnInit() {
@@ -39,6 +44,11 @@ export class UserListComponent implements OnInit {
 
   receiveToggle($event) {
     this.toggle = $event;
+  }
+
+  userClick(user: User) {
+    this.router.navigate(['detail/' + user.userId]);
+    //pass the data to the user detail page
   }
 }
 

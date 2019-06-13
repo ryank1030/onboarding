@@ -1,4 +1,3 @@
-
 <table class="table table-sm table-hover">
   <thead class="thead-dark">
     <tr>
@@ -10,7 +9,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let user of users; let i = index">
+    <tr *ngFor="let user of users; let i = index" (click)="userClick(user)">
       <th scope="row">{{i+1}}</th>
       <td>{{user.username}}</td>
       <td>{{user.firstName}}</td>
@@ -20,5 +19,4 @@
   </tbody>
 </table>
 <button class="btn btn-outline-primary btn-block" (click)="toggleAddUser()" *ngIf="!toggle">Add User</button>
-{{message}}
 <app-user-add (toggleEvent)="receiveToggle($event)" [users]="users" [toggle]="toggle"></app-user-add>
