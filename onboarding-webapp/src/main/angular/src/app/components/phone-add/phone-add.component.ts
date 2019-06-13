@@ -33,7 +33,7 @@ export class PhoneAddComponent implements OnInit {
   }
 
   onSubmit() {
-    //this.addPhone(user);
+    this.addPhone(this.assemblePhone(this.phoneNumber.value));
     console.log(this.assemblePhone(this.phoneNumber.value));
     this.toggle = !this.toggle;
     this.toggleEvent.emit(this.toggle);
@@ -42,9 +42,8 @@ export class PhoneAddComponent implements OnInit {
   assemblePhone(phoneNumber: string): Phone {
     return { phoneNumber } as Phone;
   }
-
-  //testing//
-  addPhone() {
+  
+  addPhone(phone: Phone) {
     this.userService.addPhone(this.user.userId, phone)
       .subscribe(phone => {
         this.user.phones.push(phone);
