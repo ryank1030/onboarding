@@ -7,6 +7,13 @@
     <h5 class="card-title">Username: {{user.username}}</h5>
     <h5 class="card-title">First Name: {{user.firstName}}</h5>
     <h5 class="card-title">Last Name: {{user.lastName}}</h5>
+    <div *ngFor="let phone of user.phones; let i = index">
+      <h5 class="card-title">{{i+1}} Phone ID: {{phone.phoneId}}</h5>
+      <h5 class="card-title">{{i+1}} Phone Number: {{phone.phoneNumber}}</h5>
+      <h5 class="card-title">{{i+1}} Verified: {{phone.verified}}</h5>
+      <h5 class="card-title">{{i+1}} Primary: {{phone.primary}}</h5>
+      <h5 class="card-title">{{i+1}} Verification Link: {{phone.verificationLink}}</h5>
+    </div>
     <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
     <a class="btn btn-danger" (click)="deleteUser()">Delete User</a>
   </div>
