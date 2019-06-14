@@ -77,14 +77,16 @@ export class PhoneDetailsComponent implements OnInit {
 
   updatePhone(phone: Phone) {
     this.userService.updatePhone(this.phone)
-      .subscribe();
+      .subscribe(() => {
+        this.getUser();
+      });
   }
 
   assemblePhone(phoneNumber: string) {
     this.phone.phoneNumber = phoneNumber;
   }
 
-  updatePhone2(phone: Phone) {
+  updateThisPhone(phone: Phone) {
     this.phone = phone;
   }
 
