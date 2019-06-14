@@ -17,12 +17,12 @@ export class PhoneAddComponent implements OnInit {
   @Output() toggleEvent = new EventEmitter();
 
   profileForm = this.fb.group({
-      phoneNumber: ['']
+      phoneNumber: null
     });
 
   constructor(
     private userService: UserService,
-    private fb: FormBuilder,
+    private fb: FormBuilder
   ) { }
 
   ngOnInit() {
@@ -33,8 +33,9 @@ export class PhoneAddComponent implements OnInit {
   }
 
   onSubmit() {
-    this.addPhone(this.assemblePhone(this.phoneNumber.value));
-    console.log(this.assemblePhone(this.phoneNumber.value));
+    if (this.phoneNumber !== null) {
+      this.addPhone(this.assemblePhone(this.phoneNumber.value));
+    }
     this.toggle = !this.toggle;
     this.toggleEvent.emit(this.toggle);
   }

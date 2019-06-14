@@ -18,6 +18,7 @@ export class PhoneDetailsComponent implements OnInit {
 
   @Input() user: User;
   phone: Phone;
+  toggle = false;
 
   constructor(
     private fb: FormBuilder,
@@ -36,6 +37,14 @@ export class PhoneDetailsComponent implements OnInit {
 
   get phoneNumber() {
     return this.phoneForm.get('phoneNumber');
+  }
+
+  toggleAddPhone() {
+    this.toggle = !this.toggle;
+  }
+
+  receiveToggle($event) {
+    this.toggle = $event;
   }
 
   deletePhone(phone: Phone) {
@@ -80,8 +89,6 @@ export class PhoneDetailsComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.phone);
-    console.log(this.phoneNumber.value);
     if (this.phoneNumber.value !== null) {
       this.assemblePhone(this.phoneNumber.value);
       this.updatePhone(this.phone);

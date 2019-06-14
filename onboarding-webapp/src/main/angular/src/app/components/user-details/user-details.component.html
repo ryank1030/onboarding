@@ -16,8 +16,6 @@
     </div>
   </div>
   <app-phone-details [user]="user"></app-phone-details>
-  <app-phone-add (toggleEvent)="receiveToggle($event)" [user]="user" [toggle]="toggle"></app-phone-add>
-  <button type="button" class="btn btn-primary" (click)="toggleAddPhone()" *ngIf="!toggle">Add Phone Number</button>
   <button type="button" class="btn btn-danger" (click)="deleteUser()">Delete User</button>
 </div>
 
