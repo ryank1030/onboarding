@@ -11,11 +11,12 @@
     <div class="card-body col-6">
       <p class="card-title">User ID: {{user.userId}}</p>
       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#userModal">Update User</button>
+      <p class="card-title">*phone verification only works with phones added to twilio.</p>
+      <p class="card-title">ex = '13065196022'</p>
     </div>
   </div>
   <div class="row" *ngFor="let phone of user.phones">
     <div class="card-body col-6" >
-      <p class="card-title">Phone ID: {{phone.phoneId}}</p>
       <p class="card-title">Phone Number: {{phone.phoneNumber}}</p>
       <p class="card-title">Verified: {{phone.verified}}</p>
       <p class="card-title">Primary: {{phone.primary}}</p>
@@ -24,6 +25,7 @@
     <div class="card-body col-6">
       <p class="card-title">Phone ID: {{phone.phoneId}}</p>
       <button type="button" class="btn btn-primary" (click)="makePrimary(phone)">Make Primary</button>
+      <app-update-phone [phone]="phone"></app-update-phone>
       <button type="button" class="btn btn-primary" (click)="verifyPhone(phone)">Get Phone Verificaton Link</button>
       <button type="button" class="btn btn-primary" (click)="verify(phone)">Apply Phone Verificaton Link</button>
       <button type="button" class="btn btn-danger" (click)="deletePhone(phone)">Delete Number</button>

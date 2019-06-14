@@ -56,6 +56,13 @@ export class UserService {
       );
   }
 
+  updatePhone(phone: Phone): Observable<Phone> {
+    return this.http.put<Phone>(this.phoneIdUrl(phone.userId, phone.phoneId), phone)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
   deletePhone(userId: string, phoneId: string): Observable<any> {
     return this.http.delete(this.phoneIdUrl(userId, phoneId))
       .pipe(

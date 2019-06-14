@@ -10,6 +10,7 @@ import { UserAddComponent } from './components/user-add/user-add.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UserDetailsComponent } from './components/user-details/user-details.component';
 import { PhoneAddComponent } from './components/phone-add/phone-add.component';
+import { UpdatePhoneComponent } from './components/modal/update-phone/update-phone.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { PhoneAddComponent } from './components/phone-add/phone-add.component';
     UserListComponent,
     UserAddComponent,
     UserDetailsComponent,
-    PhoneAddComponent
+    PhoneAddComponent,
+    UpdatePhoneComponent
   ],
   imports: [
     BrowserModule,

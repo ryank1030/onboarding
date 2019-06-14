@@ -1,3 +1,4 @@
+import { UpdatePhoneComponent } from './components/modal/update-phone/update-phone.component';
 import { UserListComponent } from './components/user-list/user-list.component';
 import { UserDetailsComponent } from './components/user-details/user-details.component';
 import { NgModule } from '@angular/core';
@@ -12,6 +13,9 @@ const routes: Routes = [
   },
   {
     path: 'detail/:id', component: UserDetailsComponent
+  },
+  {
+    path: 'test', component: UpdatePhoneComponent
   }
 ];
 
