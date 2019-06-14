@@ -78,6 +78,7 @@ public class PhoneService {
 
         PhoneDto temp = get(userId, dto.getPhoneId());
         temp.setPhoneNumber(dto.getPhoneNumber());
+        temp.setVerified(false);
 
         return Optional.of(temp)
                 .map(phoneAssembler::disassemble)
