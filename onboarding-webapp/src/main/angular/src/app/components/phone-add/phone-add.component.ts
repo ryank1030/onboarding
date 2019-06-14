@@ -42,7 +42,7 @@ export class PhoneAddComponent implements OnInit {
   assemblePhone(phoneNumber: string): Phone {
     return { phoneNumber } as Phone;
   }
-  
+
   addPhone(phone: Phone) {
     this.userService.addPhone(this.user.userId, phone)
       .subscribe(phone => {

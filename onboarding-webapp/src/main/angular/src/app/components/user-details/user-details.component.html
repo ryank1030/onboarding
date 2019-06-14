@@ -10,6 +10,7 @@
     </div>
     <div class="card-body col-6">
       <p class="card-title">User ID: {{user.userId}}</p>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#userModal">Update User</button>
     </div>
   </div>
   <div class="row" *ngFor="let phone of user.phones">
@@ -32,3 +33,29 @@
   <button type="button" class="btn btn-primary" (click)="toggleAddPhone()" *ngIf="!toggle">Add Phone Number</button>
   <button type="button" class="btn btn-danger" (click)="deleteUser()">Delete User</button>
 </div>
+
+<div class="modal" id="userModal" tabindex="-1" role="dialog" aria-labelledby="userModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Edit User</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="profileForm">
+                <div class="form-group">
+                  <label for="firstName">First Name</label>
+                  <input type="text" class="form-control" formControlName="firstName" id="firstName" placeholder="First Name">
+                </div>
+                <div class="form-group">
+                  <label for="lastName">Last Name</label>
+                  <input type="text" class="form-control" formControlName="lastName" id="lastName" placeholder="Last Name">
+                </div>
+                <button type="submit" (click)="onSubmit()" class="btn btn-primary" data-dismiss="modal" [disabled]="!profileForm.valid">Submit</button>
+              </form>
+        </div>
+      </div>
+    </div>
+  </div>
