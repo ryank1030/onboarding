@@ -22,10 +22,6 @@ export class UserDetailsComponent implements OnInit {
     lastName: ['']
   });
 
-  phoneForm = this.fb.group({
-    phoneNumber: null
-  });
-
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
@@ -43,40 +39,6 @@ export class UserDetailsComponent implements OnInit {
       .subscribe(user => this.user = user);
   }
 
-  deleteUser() {
-    this.userService.deleteUser(this.user.userId)
-      .subscribe();
-    this.router.navigate(['users']);
-  }
-
-  deletePhone(phone: Phone) {
-    this.userService.deletePhone(this.user.userId, phone.phoneId)
-      .subscribe(() => {
-        this.getUser();
-      });
-  }
-
-  makePrimary(phone: Phone) {
-    this.userService.makePrimary(this.user.userId, phone.phoneId)
-      .subscribe(() => {
-        this.getUser();
-      });
-  }
-
-  verifyPhone(phone: Phone) {
-    this.userService.verifyPhone(this.user.userId, phone.phoneId)
-      .subscribe(() => {
-        this.getUser();
-      });
-  }
-
-  verify(phone: Phone) {
-    this.userService.verify(this.user.userId, phone.phoneId, phone.verificationLink)
-      .subscribe(() => {
-        this.getUser();
-      });
-  }
-
   get firstName() {
     return this.profileForm.get('firstName');
   }
@@ -85,8 +47,10 @@ export class UserDetailsComponent implements OnInit {
     return this.profileForm.get('lastName');
   }
 
-  get phoneNumber() {
-    return this.phoneForm.get('phoneNumber');
+  deleteUser() {
+    this.userService.deleteUser(this.user.userId)
+      .subscribe();
+    this.router.navigate(['users']);
   }
 
   modifyUser(firstName: string, lastName: string) {
@@ -109,27 +73,5 @@ export class UserDetailsComponent implements OnInit {
       .subscribe(() => {
         this.getUser();
       });
-  }
-
-  updatePhone(phone: Phone) {
-    this.userService.updatePhone(this.phone)
-      .subscribe();
-  }
-
-  assemblePhone(phoneNumber: string) {
-    this.phone.phoneNumber = phoneNumber;
-  }
-
-  updatePhone2(phone: Phone) {
-    this.phone = phone;
-  }
-
-  onSubmit2() {
-    console.log(this.phone);
-    console.log(this.phoneNumber.value);
-    if (this.phoneNumber.value !== null) {
-      this.assemblePhone(this.phoneNumber.value);
-      this.updatePhone(this.phone);
-    }
   }
 }

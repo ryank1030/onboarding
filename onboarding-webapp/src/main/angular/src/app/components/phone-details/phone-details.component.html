@@ -1,0 +1,38 @@
+<div class="row" *ngFor="let phone of user.phones">
+  <div class="card-body col-6" >
+    <p class="card-title">Phone Number: {{phone.phoneNumber}}</p>
+    <p class="card-title">Verified: {{phone.verified}}</p>
+    <p class="card-title">Primary: {{phone.primary}}</p>
+    <p class="card-title">Verification Link: {{phone.verificationLink}}</p>
+  </div>
+  <div class="card-body col-6">
+    <p class="card-title">Phone ID: {{phone.phoneId}}</p>
+    <button type="button" class="btn btn-primary" (click)="makePrimary(phone)">Make Primary</button>
+    <button type="button" class="btn btn-primary" (click)="updatePhone2(phone)" data-toggle="modal" data-target="#phoneModal">Update Phone</button>
+    <button type="button" class="btn btn-primary" (click)="verifyPhone(phone)">Get Phone Verificaton Link</button>
+    <button type="button" class="btn btn-primary" (click)="verify(phone)">Apply Phone Verificaton Link</button>
+    <button type="button" class="btn btn-danger" (click)="deletePhone(phone)">Delete Number</button>
+  </div>
+</div>
+
+<div class="modal" id="phoneModal" tabindex="-1" role="dialog" aria-labelledby="phoneModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edit Phone</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="phoneForm">
+          <div class="form-group">
+            <label for="phoneNumber">Phone Number</label>
+            <input type="number" class="form-control" formControlName="phoneNumber" id="phoneNumber" placeholder="Phone Number">
+          </div>
+          <button type="submit" (click)="onSubmit()" class="btn btn-primary" data-dismiss="modal" [disabled]="!phoneForm.valid">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
