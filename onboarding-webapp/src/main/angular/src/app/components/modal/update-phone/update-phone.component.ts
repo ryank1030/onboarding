@@ -11,7 +11,7 @@ import { Phone } from 'src/app/models/phone';
 export class UpdatePhoneComponent implements OnInit {
 
   profileForm = this.fb.group({
-    phoneNumber: ['']
+    phoneNumber: null
   });
 
   @Input() phone: Phone;
@@ -33,8 +33,10 @@ export class UpdatePhoneComponent implements OnInit {
   }
 
   onSubmit() {
-    this.assemblePhone(this.phoneNumber.value);
-    this.updatePhone(this.phone);
+    if (this.phoneNumber.value !== null) {
+      this.assemblePhone(this.phoneNumber.value);
+      this.updatePhone(this.phone);
+    }
   }
 
   updatePhone(phone: Phone) {
