@@ -10,7 +10,7 @@ import { Phone } from 'src/app/models/phone';
 })
 export class UpdatePhoneComponent implements OnInit {
 
-  profileForm = this.fb.group({
+  phoneForm = this.fb.group({
     phoneNumber: null
   });
 
@@ -25,7 +25,7 @@ export class UpdatePhoneComponent implements OnInit {
   }
 
   get phoneNumber() {
-    return this.profileForm.get('phoneNumber');
+    return this.phoneForm.get('phoneNumber');
   }
 
   assemblePhone(phoneNumber: string) {

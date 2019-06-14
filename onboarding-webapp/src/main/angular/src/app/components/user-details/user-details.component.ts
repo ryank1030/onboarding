@@ -22,6 +22,10 @@ export class UserDetailsComponent implements OnInit {
     lastName: ['']
   });
 
+  phoneForm = this.fb.group({
+    phoneNumber: null
+  });
+
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
@@ -81,6 +85,10 @@ export class UserDetailsComponent implements OnInit {
     return this.profileForm.get('lastName');
   }
 
+  get phoneNumber() {
+    return this.phoneForm.get('phoneNumber');
+  }
+
   modifyUser(firstName: string, lastName: string) {
     this.user.firstName = firstName;
     this.user.lastName = lastName;
@@ -101,5 +109,27 @@ export class UserDetailsComponent implements OnInit {
       .subscribe(() => {
         this.getUser();
       });
+  }
+
+  updatePhone(phone: Phone) {
+    this.userService.updatePhone(this.phone)
+      .subscribe();
+  }
+
+  assemblePhone(phoneNumber: string) {
+    this.phone.phoneNumber = phoneNumber;
+  }
+
+  updatePhone2(phone: Phone) {
+    this.phone = phone;
+  }
+
+  onSubmit2() {
+    console.log(this.phone);
+    console.log(this.phoneNumber.value);
+    if (this.phoneNumber.value !== null) {
+      this.assemblePhone(this.phoneNumber.value);
+      this.updatePhone(this.phone);
+    }
   }
 }
