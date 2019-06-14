@@ -1,10 +1,11 @@
 import { Component, OnInit, Input, Output } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, FormArray } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormArray, Validators } from '@angular/forms';
 import { User } from 'src/app/models/user';
 import { Phone } from 'src/app/models/phone';
 import { USER } from 'src/app/mock-data';
 import {UserService} from '../../services/user.service';
 import { EventEmitter } from '@angular/core';
+
 
 @Component({
   selector: 'app-user-add',
@@ -15,11 +16,11 @@ import { EventEmitter } from '@angular/core';
 export class UserAddComponent implements OnInit {
 
   profileForm = this.fb.group({
-    username: [''],
-    firstName: [''],
-    lastName: [''],
+    username: [null, Validators.required],
+    firstName: [null, Validators.required],
+    lastName: [null, Validators.required],
     phones: this.fb.group({
-      phoneNumber: ['']
+      phoneNumber: [null, Validators.required]
     }),
   });
 

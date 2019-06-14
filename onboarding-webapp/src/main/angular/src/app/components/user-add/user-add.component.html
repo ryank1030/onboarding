@@ -2,6 +2,11 @@
   <div class="form-group">
     <label for="username">Username</label>
     <input type="text" class="form-control" formControlName="username" id="username" placeholder="Username">
+    <div *ngIf="username.invalid && (username.dirty || username.touched)">
+      <div *ngIf="username.errors.required" class="alert alert-danger" role="alert">
+        Username Required
+      </div>
+   </div>
   </div>
   <div class="form-group">
     <label for="firstName">First Name</label>
