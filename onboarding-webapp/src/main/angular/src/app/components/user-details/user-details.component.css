@@ -5,3 +5,8 @@
 .errors {
     color: red;
 }
+
+.help {
+    font-size: small; 
+    color: grey
+}

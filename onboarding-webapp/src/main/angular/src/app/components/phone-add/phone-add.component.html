@@ -2,6 +2,9 @@
   <div class="form-group">
     <label for="phoneNumber">Phone Number</label>
     <input type="text" class="form-control" formControlName="phoneNumber" id="phoneNumber" placeholder="Phone Number">
+    <small id="phoneHelpBlock" class="form-text text-muted">
+      Your phone number must be 10-16 characters long, contain only digits, and must different from current numbers.
+    </small>
     <div *ngIf="phoneNumber.invalid && (phoneNumber.dirty || phoneNumber.touched)">
       <div *ngIf="phoneNumber.errors.required" class="errors">
         Phone Number Required

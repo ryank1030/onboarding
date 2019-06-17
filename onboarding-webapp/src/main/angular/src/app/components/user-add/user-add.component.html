@@ -2,6 +2,9 @@
   <div class="form-group">
     <label for="username">Username</label>
     <input type="text" class="form-control" formControlName="username" id="username" placeholder="Username">
+    <small id="usernameHelpBlock" class="form-text text-muted">
+      Your username must be unique and not be taken
+    </small>
     <div *ngIf="username.invalid && (username.dirty || username.touched)">
       <div *ngIf="username.errors.required" class="errors">
         Username Required
@@ -29,6 +32,9 @@
   <div class="form-group" formGroupName="phones">
     <label for="phoneNumber">Phone Number</label>
     <input type="text" class="form-control" formControlName="phoneNumber" id="phoneNumber" placeholder="13065194092">
+    <small id="phoneHelpBlock" class="form-text text-muted">
+      Your phone number must be 10-16 characters long and contain only digits.
+    </small>
     <div *ngIf="phoneNumber.invalid && (phoneNumber.dirty || phoneNumber.touched)">
         <div *ngIf="phoneNumber.errors.required" class="errors">
           Phone Number Required
