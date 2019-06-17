@@ -7,18 +7,18 @@
   </div>
   <div class="card-body col-6">
     <p class="card-title">Phone ID: {{phone.phoneId}}</p>
-    <button type="button" class="btn btn-primary space" (click)="makePrimary(phone)">Make Primary</button>
-    <button type="button" class="btn btn-primary space" (click)="updateThisPhone(phone)" data-toggle="modal" data-target="#phoneModal">Update Phone</button>
+    <button type="button" class="btn btn-primary space" (click)="makePrimary(phone)"><i class="fas fa-star"></i> Make Primary</button>
+    <button type="button" class="btn btn-primary space" (click)="updateThisPhone(phone)" data-toggle="modal" data-target="#phoneModal"><i class="fas fa-edit"></i> Update Phone</button>
     <div>
       <button type="button" class="btn btn-primary space" (click)="verifyPhone(phone)">Get Verificaton Link</button>
       <button type="button" class="btn btn-primary space" (click)="verify(phone)">Apply Verificaton Link</button>
     </div>
-    <button type="button" class="btn btn-danger space" (click)="deletePhone(phone)">Delete Number</button>
+    <button type="button" class="btn btn-danger space" (click)="deletePhone(phone)"><i class="fas fa-trash"></i> Delete Number</button>
     <p class="card-title help">*phone verification only works with phones added to twilio.<br />ex = '13065196022'</p>
   </div>
 </div>
 <app-phone-add (toggleEvent)="receiveToggle($event)" [user]="user" [toggle]="toggle"></app-phone-add>
-<button type="button" class="btn btn-primary btn-block" (click)="toggleAddPhone()" *ngIf="!toggle">Add Phone Number</button>
+<button type="button" class="btn btn-primary btn-block" (click)="toggleAddPhone()" *ngIf="!toggle"><i class="fas fa-plus"></i> Add Phone Number</button>
 
 <div class="modal" id="phoneModal" tabindex="-1" role="dialog" aria-labelledby="phoneModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">

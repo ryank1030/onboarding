@@ -5,7 +5,7 @@
       <th scope="col">Username</th>
       <th scope="col">First</th>
       <th scope="col">Last</th>
-      <th scope="col">Phone</th>
+      <th scope="col">Phone <i class="fas fa-mobile-alt"></i></th>
     </tr>
   </thead>
   <tbody>
@@ -18,5 +18,5 @@
     </tr>
   </tbody>
 </table>
-<button class="btn btn-outline-primary btn-block" (click)="toggleAddUser()" *ngIf="!toggle">Add User</button>
+<button class="btn btn-outline-primary btn-block" (click)="toggleAddUser()" *ngIf="!toggle"><i class="fas fa-user-plus"></i> Add User</button>
 <app-user-add (toggleEvent)="receiveToggle($event)" [users]="users" [toggle]="toggle"></app-user-add>

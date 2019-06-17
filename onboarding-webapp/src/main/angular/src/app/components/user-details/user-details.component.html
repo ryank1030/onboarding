@@ -10,11 +10,11 @@
     </div>
     <div class="card-body col-6">
       <p class="card-title">User ID: {{user.userId}}</p>
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#userModal">Update User</button>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#userModal"><i class="fas fa-edit"></i> Update User</button>
     </div>
   </div>
   <app-phone-details [user]="user"></app-phone-details>
-  <button type="button" class="btn btn-danger" (click)="deleteUser()">Delete User</button>
+  <button type="button" class="btn btn-danger" (click)="deleteUser()"><i class="fas fa-trash"></i> Delete User</button>
 </div>
 
 <div class="modal" id="userModal" tabindex="-1" role="dialog" aria-labelledby="userModalLabel" aria-hidden="true">
