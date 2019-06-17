@@ -1,7 +1,18 @@
 <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" *ngIf="toggle">
   <div class="form-group">
     <label for="phoneNumber">Phone Number</label>
-    <input type="number" class="form-control" formControlName="phoneNumber" id="phoneNumber" placeholder="Phone Number">
+    <input type="text" class="form-control" formControlName="phoneNumber" id="phoneNumber" placeholder="Phone Number">
+    <div *ngIf="phoneNumber.invalid && (phoneNumber.dirty || phoneNumber.touched)">
+      <div *ngIf="phoneNumber.errors.required" class="errors">
+        Phone Number Required
+      </div>
+      <div *ngIf="phoneNumber.errors.minlength" class="errors">
+        Phone Number Too Short
+      </div>
+      <div *ngIf="phoneNumber.errors.pattern" class="errors">
+        Phone Number Must Be Digits
+      </div>
+    </div>
   </div>
   <button type="submit" class="btn btn-primary" [disabled]="!profileForm.valid">Submit</button>
 </form>

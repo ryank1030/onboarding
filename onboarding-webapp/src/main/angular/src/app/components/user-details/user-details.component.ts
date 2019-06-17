@@ -3,7 +3,7 @@ import { UserService } from './../../services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/models/user';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-user-details',
@@ -16,8 +16,8 @@ export class UserDetailsComponent implements OnInit {
   phone: Phone;
 
   profileForm = this.fb.group({
-    firstName: [''],
-    lastName: ['']
+    firstName: [null, Validators.required],
+    lastName: [null, Validators.required]
   });
 
   constructor(

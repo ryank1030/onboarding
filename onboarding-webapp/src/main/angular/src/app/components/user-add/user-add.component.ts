@@ -20,7 +20,7 @@ export class UserAddComponent implements OnInit {
     firstName: [null, Validators.required],
     lastName: [null, Validators.required],
     phones: this.fb.group({
-      phoneNumber: [null, Validators.required]
+      phoneNumber: [null, [Validators.required, Validators.minLength(10), Validators.pattern('[0-9]*')]]
     }),
   });
 

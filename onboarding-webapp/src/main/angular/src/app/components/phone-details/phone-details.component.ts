@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Phone } from 'src/app/models/phone';
 import { User } from 'src/app/models/user';
@@ -13,7 +13,7 @@ import { User } from 'src/app/models/user';
 export class PhoneDetailsComponent implements OnInit {
 
   phoneForm = this.fb.group({
-    phoneNumber: null
+    phoneNumber: [null, [Validators.required, Validators.minLength(10), Validators.pattern('[0-9]*')]]
   });
 
   @Input() user: User;

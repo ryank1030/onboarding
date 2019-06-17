@@ -3,7 +3,7 @@ import { EventEmitter } from '@angular/core';
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
 import { Phone } from 'src/app/models/phone';
-import { FormBuilder, FormControl, FormGroup, FormArray } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormArray, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-phone-add',
@@ -17,7 +17,7 @@ export class PhoneAddComponent implements OnInit {
   @Output() toggleEvent = new EventEmitter();
 
   profileForm = this.fb.group({
-      phoneNumber: null
+      phoneNumber: [null, [Validators.required, Validators.minLength(10), Validators.pattern('[0-9]*')]]
     });
 
   constructor(

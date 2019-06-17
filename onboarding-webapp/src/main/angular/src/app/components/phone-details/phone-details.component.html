@@ -21,7 +21,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Edit Phone</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Update Phone</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -30,7 +30,18 @@
         <form [formGroup]="phoneForm">
           <div class="form-group">
             <label for="phoneNumber">Phone Number</label>
-            <input type="number" class="form-control" formControlName="phoneNumber" id="phoneNumber" placeholder="Phone Number">
+            <input type="text" class="form-control" formControlName="phoneNumber" id="phoneNumber" placeholder="Phone Number">
+            <div *ngIf="phoneNumber.invalid && (phoneNumber.dirty || phoneNumber.touched)">
+              <div *ngIf="phoneNumber.errors.required" class="errors">
+                Phone Number Required
+              </div>
+              <div *ngIf="phoneNumber.errors.minlength" class="errors">
+                Phone Number Too Short
+              </div>
+              <div *ngIf="phoneNumber.errors.pattern" class="errors">
+                Phone Number Must Be Digits
+              </div>
+            </div>
           </div>
           <button type="submit" (click)="onSubmit()" class="btn btn-primary" data-dismiss="modal" [disabled]="!phoneForm.valid">Submit</button>
         </form>

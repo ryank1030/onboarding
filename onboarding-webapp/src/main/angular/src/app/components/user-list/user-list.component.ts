@@ -1,6 +1,6 @@
 import { Phone } from './../../models/phone';
 import { USER } from 'src/app/mock-data';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import {User} from "../../models/user";
 import {UserService} from "../../services/user.service";
 import { Router } from '@angular/router';
@@ -14,7 +14,6 @@ export class UserListComponent implements OnInit {
 
   users: User[];
   toggle = false;
-  test = '';
 
   constructor(
     private userService: UserService,
