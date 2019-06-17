@@ -48,10 +48,14 @@ export class PhoneDetailsComponent implements OnInit {
   }
 
   deletePhone(phone: Phone) {
+    if (this.user.phones.length > 1) {
     this.userService.deletePhone(this.user.userId, phone.phoneId)
       .subscribe(() => {
         this.getUser();
       });
+    } else {
+      this.userService.handleError(Error('User Must Have One Phone'));
+    }
   }
 
   makePrimary(phone: Phone) {

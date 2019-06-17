@@ -1,16 +1,18 @@
 <div class="row" *ngFor="let phone of user.phones">
   <div class="card-body col-6" >
-    <p class="card-title">Phone Number: {{phone.phoneNumber}}</p>
-    <p class="card-title">Verified: {{phone.verified}}</p>
-    <p class="card-title">Primary: {{phone.primary}}</p>
-    <p class="card-title">Verification Link: {{phone.verificationLink}}</p>
+    <p class="card-title">Phone Number: <input class="form-control" type="text" value="{{phone.phoneNumber}}" readonly></p>
+    <p class="card-title">Verified: <input class="form-control" type="text" value="{{phone.verified}}" readonly></p>
+    <p class="card-title">Primary: <input class="form-control" type="text" value="{{phone.primary}}" readonly></p>
+    <p class="card-title">Verification Link: <input class="form-control" type="text" value="{{phone.verificationLink}}" readonly></p>
   </div>
   <div class="card-body col-6">
     <p class="card-title">Phone ID: {{phone.phoneId}}</p>
     <button type="button" class="btn btn-primary" (click)="makePrimary(phone)">Make Primary</button>
     <button type="button" class="btn btn-primary" (click)="updateThisPhone(phone)" data-toggle="modal" data-target="#phoneModal">Update Phone</button>
-    <button type="button" class="btn btn-primary" (click)="verifyPhone(phone)">Get Phone Verificaton Link</button>
-    <button type="button" class="btn btn-primary" (click)="verify(phone)">Apply Phone Verificaton Link</button>
+    <div>
+      <button type="button" class="btn btn-primary" (click)="verifyPhone(phone)">Get Verificaton Link</button>
+      <button type="button" class="btn btn-primary" (click)="verify(phone)">Apply Verificaton Link</button>
+    </div>
     <button type="button" class="btn btn-danger" (click)="deletePhone(phone)">Delete Number</button>
   </div>
 </div>
