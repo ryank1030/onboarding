@@ -64,12 +64,16 @@ export class UserAddComponent implements OnInit {
     return {username, firstName, lastName, phones} as User;
   }
 
+  toggleComponent() {
+    this.toggle = !this.toggle;
+    this.toggleEvent.emit(this.toggle);
+  }
+
   onSubmit() {
     this.addUser(
       this.assembleUser(this.username.value, this.firstName.value, this.lastName.value, this.assemblePhone(this.phoneNumber.value))
       );
-    this.toggle = !this.toggle;
-    this.toggleEvent.emit(this.toggle);
+    this.toggleComponent();
   }
 
   addUser(u: User) {

@@ -7,13 +7,14 @@
   </div>
   <div class="card-body col-6">
     <p class="card-title">Phone ID: {{phone.phoneId}}</p>
-    <button type="button" class="btn btn-primary" (click)="makePrimary(phone)">Make Primary</button>
-    <button type="button" class="btn btn-primary" (click)="updateThisPhone(phone)" data-toggle="modal" data-target="#phoneModal">Update Phone</button>
+    <button type="button" class="btn btn-primary space" (click)="makePrimary(phone)">Make Primary</button>
+    <button type="button" class="btn btn-primary space" (click)="updateThisPhone(phone)" data-toggle="modal" data-target="#phoneModal">Update Phone</button>
     <div>
-      <button type="button" class="btn btn-primary" (click)="verifyPhone(phone)">Get Verificaton Link</button>
-      <button type="button" class="btn btn-primary" (click)="verify(phone)">Apply Verificaton Link</button>
+      <button type="button" class="btn btn-primary space" (click)="verifyPhone(phone)">Get Verificaton Link</button>
+      <button type="button" class="btn btn-primary space" (click)="verify(phone)">Apply Verificaton Link</button>
     </div>
-    <button type="button" class="btn btn-danger" (click)="deletePhone(phone)">Delete Number</button>
+    <button type="button" class="btn btn-danger space" (click)="deletePhone(phone)">Delete Number</button>
+    <p class="card-title help">*phone verification only works with phones added to twilio.<br />ex = '13065196022'</p>
   </div>
 </div>
 <app-phone-add (toggleEvent)="receiveToggle($event)" [user]="user" [toggle]="toggle"></app-phone-add>
