@@ -38,6 +38,9 @@
               <div *ngIf="phoneNumber.errors.minlength" class="errors">
                 Phone Number Too Short
               </div>
+              <div *ngIf="phoneNumber.errors.maxlength" class="errors">
+                Phone Number Too Long
+              </div>
               <div *ngIf="phoneNumber.errors.pattern" class="errors">
                 Phone Number Must Be Digits
               </div>

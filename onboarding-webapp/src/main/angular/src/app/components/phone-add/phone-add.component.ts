@@ -17,7 +17,7 @@ export class PhoneAddComponent implements OnInit {
   @Output() toggleEvent = new EventEmitter();
 
   profileForm = this.fb.group({
-      phoneNumber: [null, [Validators.required, Validators.minLength(10), Validators.pattern('[0-9]*')]]
+      phoneNumber: [null, [Validators.required, Validators.minLength(10), Validators.maxLength(16), Validators.pattern('[0-9]*')]]
     });
 
   constructor(

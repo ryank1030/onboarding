@@ -13,7 +13,7 @@ import { User } from 'src/app/models/user';
 export class PhoneDetailsComponent implements OnInit {
 
   phoneForm = this.fb.group({
-    phoneNumber: [null, [Validators.required, Validators.minLength(10), Validators.pattern('[0-9]*')]]
+    phoneNumber: [null, [Validators.required, Validators.minLength(10), Validators.maxLength(16), Validators.pattern('[0-9]*')]]
   });
 
   @Input() user: User;
