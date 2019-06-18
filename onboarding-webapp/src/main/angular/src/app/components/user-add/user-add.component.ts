@@ -1,3 +1,4 @@
+import { catchError } from 'rxjs/operators';
 import { Component, OnInit, Input, Output } from '@angular/core';
 import { FormBuilder, FormsModule, FormControl, FormGroup, FormArray, Validators } from '@angular/forms';
 import { User } from 'src/app/models/user';

@@ -1,2 +1,2 @@
-<input type="text" (input)="onChange($event.target.value)" (blur)="onTouched()" [disabled]="disabled" #input>
+<input type="text" (input)="onChange($event.target.value)" (blur)="onTouched()" [disabled]="disabled" [(ngModel)]="test"/>
 <br/> local: {{value}} 

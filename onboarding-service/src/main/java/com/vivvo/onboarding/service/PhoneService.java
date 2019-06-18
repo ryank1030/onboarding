@@ -54,10 +54,32 @@ public class PhoneService {
     }
 
     public List<PhoneDto> getList(UUID userId) {
-        return phoneRepository.findByUserId(userId)
+        List<PhoneDto> dtos =
+                phoneRepository.findByUserId(userId)
                 .stream()
                 .map(phoneAssembler::assemble)
                 .collect(Collectors.toList());
+        dtos = sortList(dtos);
+        return dtos;
+    }
+
+    private List<PhoneDto> sortList(List<PhoneDto> dtos) {
+        if (dtos.size() == 1 ) {
+            //we only have one phone
+            dtos.get(0).setPrimary(true);
+        } else {
+            //we have more than one phone
+            for (int i = 0; i < dtos.size(); i++) {
+                //look for the primary phone
+                if (dtos.get(i).isPrimary()) {
+                    //the phone is primary so move it to position 0
+                    PhoneDto temp = dtos.get(i);
+                    dtos.set(i, dtos.get(0));
+                    dtos.set(0, temp);
+                }
+            }
+        }
+        return dtos;
     }
 
     public void delete(UUID phoneId) {
@@ -153,11 +175,10 @@ public class PhoneService {
         Twilio.init(applicationProperties.getTwilio().getAccountSID(), applicationProperties.getTwilio().getAuthToken());
 
         //removed unused variable
-        Message
-                .creator(new PhoneNumber(phone), // to
+        Message.creator(new PhoneNumber(phone), // to
                         new PhoneNumber("+16475603984"), // from
                         link)
-                .create();
+                        .create();
     }
 }
 

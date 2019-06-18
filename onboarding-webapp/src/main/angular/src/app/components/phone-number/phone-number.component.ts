@@ -15,22 +15,21 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 })
 export class PhoneNumberComponent implements ControlValueAccessor {
 
-  @ViewChild('input') input: ElementRef;
+  test: string;
   disabled: boolean;
   value: string;
-  onChange: (value: any) => void;
-  onTouched: () => void;
-
+  onChange: () => { };
+  onTouched: () => { };
 
   constructor() { }
 
   writeValue(value: string): void {
-    this.input.nativeElement.value = value;
+    this.test = value;
   }
-  registerOnChange(fn: (value: any) => void) {
+  registerOnChange(fn: any) {
     this.onChange = fn;
   }
-  registerOnTouched(fn: () => void) {
+  registerOnTouched(fn: any) {
     this.onTouched = fn;
   }
   setDisabledState?(disabled: boolean): void {

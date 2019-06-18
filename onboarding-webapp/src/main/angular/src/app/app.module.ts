@@ -7,7 +7,7 @@ import { MainHeaderComponent } from './components/main-header/main-header.compon
 import { UserListComponent } from './components/user-list/user-list.component';
 import { HttpClientModule} from "@angular/common/http";
 import { UserAddComponent } from './components/user-add/user-add.component';
-import { ReactiveFormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ReactiveFormsModule, NG_VALUE_ACCESSOR, FormsModule } from '@angular/forms';
 import { UserDetailsComponent } from './components/user-details/user-details.component';
 import { PhoneAddComponent } from './components/phone-add/phone-add.component';
 import { PhoneDetailsComponent } from './components/phone-details/phone-details.component';
@@ -30,7 +30,8 @@ import { TestComponent } from './components/test/test.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
