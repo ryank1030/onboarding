@@ -30,7 +30,7 @@ export class UserAddComponent implements OnInit {
   @Input() users: User[];
   @Input() toggle: boolean;
   @Output() toggleEvent = new EventEmitter();
-  usernameError = false;
+  errors: Error;
 
   constructor(
     private fb: FormBuilder,
@@ -46,14 +46,18 @@ export class UserAddComponent implements OnInit {
   }
 
   onSubmit() {
+    this.errors = null;
     this.addUser(this.profileForm.getRawValue() as User);
-    this.toggleComponent();
   }
 
   addUser(u: User) {
     this.userService.addUser(u)
       .subscribe(user => {
         this.users.push(user);
+        this.toggleComponent();
+    },
+    err => {
+      this.errors = err;
     });
   }
 }

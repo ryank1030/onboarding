@@ -59,11 +59,11 @@ public class PhoneService {
                 .stream()
                 .map(phoneAssembler::assemble)
                 .collect(Collectors.toList());
-        dtos = sortList(dtos);
+        dtos = sortListByPrimary(dtos);
         return dtos;
     }
 
-    private List<PhoneDto> sortList(List<PhoneDto> dtos) {
+    private List<PhoneDto> sortListByPrimary(List<PhoneDto> dtos) {
         if (dtos.size() == 1 ) {
             //we only have one phone
             dtos.get(0).setPrimary(true);

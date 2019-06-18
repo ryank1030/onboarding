@@ -5,17 +5,23 @@
     <small id="usernameHelpBlock" class="form-text text-muted">
       Your username must be unique and not be taken
     </small>
-    <div *ngIf="usernameError" class="errors">
-      Username Required
+    <div *ngIf="errors && errors.username" class="errors">
+      {{errors.username}}
     </div>
   </div>
   <div class="form-group">
     <label for="firstName">First Name</label>
     <input type="text" class="form-control" formControlName="firstName" id="firstName" placeholder="First Name">
+    <div *ngIf="errors && errors.firstName" class="errors">
+      {{errors.firstName}} 
+    </div>
   </div>
   <div class="form-group">
     <label for="lastName">Last Name</label>
     <input type="text" class="form-control" formControlName="lastName" id="lastName" placeholder="Last Name">
+    <div *ngIf="errors && errors.lastName" class="errors">
+      {{errors.lastName}}
+    </div>
   </div>
   <div class="form-group" formArrayName="phones">
     <div [formGroupName]="0">
@@ -24,6 +30,9 @@
       <small id="phoneHelpBlock" class="form-text text-muted">
         Your phone number must be 10-16 characters long and contain only digits.
       </small>
+      <div *ngIf="errors && errors.phoneNumber" class="errors">
+        {{errors.phoneNumber}} 
+      </div>
     </div>
   </div>
   <button type="submit" class="btn btn-primary" [disabled]="!profileForm.valid">Submit</button>
