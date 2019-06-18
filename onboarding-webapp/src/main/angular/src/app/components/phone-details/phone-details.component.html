@@ -37,22 +37,11 @@
             <small id="phoneHelpBlock" class="form-text text-muted">
               Your phone number must be 10-16 characters long, contain only digits, and must different from current numbers.
             </small>
-            <div *ngIf="phoneNumber.invalid && (phoneNumber.dirty || phoneNumber.touched)">
-              <div *ngIf="phoneNumber.errors.required" class="errors">
-                Phone Number Required
-              </div>
-              <div *ngIf="phoneNumber.errors.minlength" class="errors">
-                Phone Number Too Short
-              </div>
-              <div *ngIf="phoneNumber.errors.maxlength" class="errors">
-                Phone Number Too Long
-              </div>
-              <div *ngIf="phoneNumber.errors.pattern" class="errors">
-                Phone Number Must Be Digits
-              </div>
+            <div *ngIf="errors && errors.phoneNumber" class="errors">
+              {{errors.phoneNumber}} 
             </div>
           </div>
-          <button type="submit" (click)="onSubmit()" class="btn btn-primary" data-dismiss="modal" [disabled]="!phoneForm.valid">Submit</button>
+          <button type="submit" (click)="onSubmit()" class="btn btn-primary" [disabled]="!phoneForm.valid">Submit</button>
         </form>
       </div>
     </div>

@@ -20,6 +20,7 @@ export class PhoneDetailsComponent implements OnInit {
   @Input() user: User;
   phone: Phone;
   toggle = false;
+  errors: Error;
 
   constructor(
     private fb: FormBuilder,
@@ -84,14 +85,17 @@ export class PhoneDetailsComponent implements OnInit {
       });
   }
 
-  updatePhone(phone: Phone) {
-    this.userService.updatePhone(this.phone)
+  updatePhone(userId: string, phoneId: string, phoneNumber: string) {
+    this.userService.updatePhone({userId, phoneId, phoneNumber} as Phone)
       .subscribe(() => {
         this.getUser();
+      }, err => {
+        this.errors = err;
       });
   }
 
   onSubmit() {
-      this.phone.phoneNumber = this.phoneNumber.value;
+      this.errors = null;
+      this.updatePhone(this.phone.userId, this.phone.phoneId, this.phoneNumber.value);
   }
 }

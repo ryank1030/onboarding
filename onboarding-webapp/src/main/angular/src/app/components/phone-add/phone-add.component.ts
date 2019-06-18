@@ -15,6 +15,7 @@ export class PhoneAddComponent implements OnInit {
   @Input() user: User;
   @Input() toggle: boolean;
   @Output() toggleEvent = new EventEmitter();
+  errors: Error;
 
   profileForm = this.fb.group({
       phoneNumber: null
@@ -29,7 +30,11 @@ export class PhoneAddComponent implements OnInit {
   }
 
   onSubmit() {
+    this.errors = null;
     this.addPhone(this.profileForm.getRawValue() as Phone);
+  }
+
+  toggleComponent() {
     this.toggle = !this.toggle;
     this.toggleEvent.emit(this.toggle);
   }
@@ -38,6 +43,9 @@ export class PhoneAddComponent implements OnInit {
     this.userService.addPhone(this.user.userId, phone)
       .subscribe(phone => {
         this.user.phones.push(phone);
+        this.toggleComponent();
+      }, err => {
+        this.errors = err;
       });
   }
 }

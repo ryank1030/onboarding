@@ -100,6 +100,7 @@ export class UserService {
   }
 
   handleError(error) {
+    /*
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {
       // client-side error
@@ -108,7 +109,8 @@ export class UserService {
       // server-side error
       errorMessage = `Error Code: ${error.status}\n Message: ${JSON.stringify(error.error)}`;
     }
-    //window.alert(errorMessage);
+    window.alert(errorMessage);
+    */
     return throwError(error.error);
   }
 }
