@@ -16,8 +16,8 @@ export class UserDetailsComponent implements OnInit {
   phone: Phone;
 
   profileForm = this.fb.group({
-    firstName: [null, Validators.required],
-    lastName: [null, Validators.required]
+    firstName: null,
+    lastName: null
   });
 
   constructor(
@@ -34,7 +34,10 @@ export class UserDetailsComponent implements OnInit {
   getUser(): void {
     const id = this.route.snapshot.paramMap.get('id');
     this.userService.getUser(id)
-      .subscribe(user => this.user = user);
+      .subscribe(user => {
+        this.user = user;
+        this.profileForm.patchValue(user);
+      });
   }
 
   get firstName() {
@@ -45,15 +48,15 @@ export class UserDetailsComponent implements OnInit {
     return this.profileForm.get('lastName');
   }
 
+  modifyUser(firstName: string, lastName: string) {
+    this.user.firstName = firstName;
+    this.user.lastName = lastName;
+  }
+
   deleteUser() {
     this.userService.deleteUser(this.user.userId)
       .subscribe();
     this.router.navigate(['users']);
-  }
-
-  modifyUser(firstName: string, lastName: string) {
-    this.user.firstName = firstName;
-    this.user.lastName = lastName;
   }
 
   onSubmit() {
@@ -62,5 +65,6 @@ export class UserDetailsComponent implements OnInit {
       .subscribe(() => {
         this.getUser();
       });
+    this.getUser();
   }
 }

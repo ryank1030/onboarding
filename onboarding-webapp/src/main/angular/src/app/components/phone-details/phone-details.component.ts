@@ -14,7 +14,7 @@ import { userInfo } from 'os';
 export class PhoneDetailsComponent implements OnInit {
 
   phoneForm = this.fb.group({
-    phoneNumber: [null, [Validators.required, Validators.minLength(10), Validators.maxLength(16), Validators.pattern('[0-9]*')]]
+    phoneNumber: null
   });
 
   @Input() user: User;
@@ -38,6 +38,10 @@ export class PhoneDetailsComponent implements OnInit {
 
   get phoneNumber() {
     return this.phoneForm.get('phoneNumber');
+  }
+
+  updateThisPhone(phone: Phone) {
+    this.phone = phone;
   }
 
   toggleAddPhone() {
@@ -87,18 +91,7 @@ export class PhoneDetailsComponent implements OnInit {
       });
   }
 
-  assemblePhone(phoneNumber: string) {
-    this.phone.phoneNumber = phoneNumber;
-  }
-
-  updateThisPhone(phone: Phone) {
-    this.phone = phone;
-  }
-
   onSubmit() {
-    if (this.phoneNumber.value !== null) {
-      this.assemblePhone(this.phoneNumber.value);
-      this.updatePhone(this.phone);
-    }
+      this.phone.phoneNumber = this.phoneNumber.value;
   }
 }
