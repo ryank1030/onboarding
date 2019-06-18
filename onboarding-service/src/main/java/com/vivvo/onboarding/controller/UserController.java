@@ -19,6 +19,12 @@ public class UserController {
     @GetMapping
     public List<UserDto> get() { return userService.get(); }
 
+    @GetMapping("/sortFirst")
+    public List<UserDto> sortByFirstName() { return userService.sortByFirstName();}
+
+    @GetMapping("/sortLast")
+    public List<UserDto> sortByLastName() { return userService.sortByLastName();}
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public UserDto create(@RequestBody UserDto dto) {

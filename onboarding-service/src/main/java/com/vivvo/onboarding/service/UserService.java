@@ -110,6 +110,18 @@ public class UserService {
                 .map(userAssembler::assemble)
                 .collect(Collectors.toList());
     }
+
+    public List<UserDto> sortByFirstName(){
+        return get().stream()
+                .sorted(Comparator.comparing(UserDto::getFirstName))
+                .collect(Collectors.toList());
+    }
+
+    public List<UserDto> sortByLastName(){
+        return get().stream()
+                .sorted(Comparator.comparing(UserDto::getLastName))
+                .collect(Collectors.toList());
+    }
 }
 
 

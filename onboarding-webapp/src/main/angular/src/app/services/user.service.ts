@@ -21,6 +21,13 @@ export class UserService {
       );
   }
 
+  getSortedUsers(): Observable<User[]> {
+    return this.http.get<User[]>(this.usersUrl + '/sortFirst')
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
   addUser(user: User): Observable<User> {
     return this.http.post<User>(this.usersUrl, user)
       .pipe(
@@ -100,17 +107,6 @@ export class UserService {
   }
 
   handleError(error) {
-    /*
-    let errorMessage = '';
-    if (error.error instanceof ErrorEvent) {
-      // client-side error
-      errorMessage = `Error: ${error.error.message}`;
-    } else {
-      // server-side error
-      errorMessage = `Error Code: ${error.status}\n Message: ${JSON.stringify(error.error)}`;
-    }
-    window.alert(errorMessage);
-    */
     return throwError(error.error);
   }
 }
