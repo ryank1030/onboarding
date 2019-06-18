@@ -106,7 +106,8 @@ export class UserService {
       errorMessage = `Error: ${error.error.message}`;
     } else {
       // server-side error
-      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+      //errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}\nResponse: ${error.error}`;
+      errorMessage = `Error Code: ${error.status}\n Message: ${JSON.stringify(error.error)}`;
     }
     window.alert(errorMessage);
     return throwError(errorMessage);

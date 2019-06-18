@@ -16,17 +16,20 @@ import { EventEmitter } from '@angular/core';
 export class UserAddComponent implements OnInit {
 
   profileForm = this.fb.group({
-    username: [null, Validators.required],
-    firstName: [null, Validators.required],
-    lastName: [null, Validators.required],
-    phones: this.fb.group({
-      phoneNumber: [null, [Validators.required, Validators.minLength(10), Validators.maxLength(16), Validators.pattern('[0-9]*')]]
-    }),
+    username: null,
+    firstName: null,
+    lastName: null,
+    phones: this.fb.array([
+      this.fb.group({
+        phoneNumber: null
+      })
+    ]),
   });
 
   @Input() users: User[];
   @Input() toggle: boolean;
   @Output() toggleEvent = new EventEmitter();
+  usernameError = false;
 
   constructor(
     private fb: FormBuilder,
@@ -36,43 +39,13 @@ export class UserAddComponent implements OnInit {
   ngOnInit() {
   }
 
-  get username() {
-    return this.profileForm.get('username');
-  }
-
-  get firstName() {
-    return this.profileForm.get('firstName');
-  }
-
-  get lastName() {
-    return this.profileForm.get('lastName');
-  }
-
-  get phones() {
-    return this.profileForm.get('phones');
-  }
-
-  get phoneNumber() {
-    return this.phones.get('phoneNumber');
-  }
-
-  assemblePhone(phoneNumber: string): Phone[] {
-    return [ { phoneNumber } as Phone ];
-  }
-
-  assembleUser(username: string, firstName: string, lastName: string, phones: Phone[]): User {
-    return {username, firstName, lastName, phones} as User;
-  }
-
   toggleComponent() {
     this.toggle = !this.toggle;
     this.toggleEvent.emit(this.toggle);
   }
 
   onSubmit() {
-    this.addUser(
-      this.assembleUser(this.username.value, this.firstName.value, this.lastName.value, this.assemblePhone(this.phoneNumber.value))
-      );
+    this.addUser(this.profileForm.getRawValue() as User);
     this.toggleComponent();
   }
 

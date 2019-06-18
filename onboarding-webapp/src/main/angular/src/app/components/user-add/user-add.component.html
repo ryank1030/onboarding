@@ -5,50 +5,26 @@
     <small id="usernameHelpBlock" class="form-text text-muted">
       Your username must be unique and not be taken
     </small>
-    <div *ngIf="username.invalid && (username.dirty || username.touched)">
-      <div *ngIf="username.errors.required" class="errors">
-        Username Required
-      </div>
-   </div>
+    <div *ngIf="usernameError" class="errors">
+      Username Required
+    </div>
   </div>
   <div class="form-group">
     <label for="firstName">First Name</label>
     <input type="text" class="form-control" formControlName="firstName" id="firstName" placeholder="First Name">
-    <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)">
-        <div *ngIf="firstName.errors.required" class="errors">
-          First Name Required
-        </div>
-     </div>
   </div>
   <div class="form-group">
     <label for="lastName">Last Name</label>
     <input type="text" class="form-control" formControlName="lastName" id="lastName" placeholder="Last Name">
-    <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)">
-        <div *ngIf="lastName.errors.required" class="errors">
-          Last Name Required
-        </div>
-     </div>
   </div>
-  <div class="form-group" formGroupName="phones">
-    <label for="phoneNumber">Phone Number</label>
-    <input type="text" class="form-control" formControlName="phoneNumber" id="phoneNumber" placeholder="13065194092">
-    <small id="phoneHelpBlock" class="form-text text-muted">
-      Your phone number must be 10-16 characters long and contain only digits.
-    </small>
-    <div *ngIf="phoneNumber.invalid && (phoneNumber.dirty || phoneNumber.touched)">
-        <div *ngIf="phoneNumber.errors.required" class="errors">
-          Phone Number Required
-        </div>
-        <div *ngIf="phoneNumber.errors.minlength" class="errors">
-          Phone Number Too Short
-        </div>
-        <div *ngIf="phoneNumber.errors.maxlength" class="errors">
-          Phone Number Too Long
-        </div>
-        <div *ngIf="phoneNumber.errors.pattern" class="errors">
-          Phone Number Must Be Digits
-        </div>
-     </div>
+  <div class="form-group" formArrayName="phones">
+    <div [formGroupName]="0">
+      <label for="phoneNumber">Phone Number</label>
+      <input type="text" class="form-control" formControlName="phoneNumber" id="phoneNumber" placeholder="13065194092">
+      <small id="phoneHelpBlock" class="form-text text-muted">
+        Your phone number must be 10-16 characters long and contain only digits.
+      </small>
+    </div>
   </div>
   <button type="submit" class="btn btn-primary" [disabled]="!profileForm.valid">Submit</button>
   <button type="button" class="btn btn-primary space" (click)="toggleComponent()">Hide</button>
