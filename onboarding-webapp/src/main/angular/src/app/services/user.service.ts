@@ -21,8 +21,15 @@ export class UserService {
       );
   }
 
-  getSortedUsers(): Observable<User[]> {
+  getUsersSortedByFirst(): Observable<User[]> {
     return this.http.get<User[]>(this.usersUrl + '/sortFirst')
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  getUsersSortedByLast(): Observable<User[]> {
+    return this.http.get<User[]>(this.usersUrl + '/sortLast')
       .pipe(
         catchError(this.handleError)
       );

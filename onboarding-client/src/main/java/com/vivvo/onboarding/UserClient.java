@@ -62,6 +62,20 @@ public class UserClient {
                 .get(new GenericType<List<UserDto>>(){});  //Don't understand this
     }
 
+    public List<UserDto> sortByFirstName() {
+        return userTarget()
+                .path("/sortFirst")
+                .request()
+                .get(new GenericType<List<UserDto>>(){});
+    }
+
+    public List<UserDto> sortByLastName() {
+        return userTarget()
+                .path("/sortLast")
+                .request()
+                .get(new GenericType<List<UserDto>>(){});
+    }
+
     private WebTarget userTarget() {
         return client.target(baseUri)
                 .path("api")

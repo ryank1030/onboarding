@@ -22,6 +22,12 @@ public class UserController {
     @GetMapping
     public List<UserDto> get() { return userClient.get(); }
 
+    @GetMapping("/sortFirst")
+    public List<UserDto> sortByFirstName() { return userClient.sortByFirstName();}
+
+    @GetMapping("/sortLast")
+    public List<UserDto> sortByLastName() { return userClient.sortByLastName();}
+
     //working
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
