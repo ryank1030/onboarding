@@ -4,6 +4,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Phone } from 'src/app/models/phone';
 import { User } from 'src/app/models/user';
+import { userInfo } from 'os';
 
 @Component({
   selector: 'app-phone-details',

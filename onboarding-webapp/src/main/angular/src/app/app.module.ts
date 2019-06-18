@@ -7,10 +7,12 @@ import { MainHeaderComponent } from './components/main-header/main-header.compon
 import { UserListComponent } from './components/user-list/user-list.component';
 import { HttpClientModule} from "@angular/common/http";
 import { UserAddComponent } from './components/user-add/user-add.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { UserDetailsComponent } from './components/user-details/user-details.component';
 import { PhoneAddComponent } from './components/phone-add/phone-add.component';
 import { PhoneDetailsComponent } from './components/phone-details/phone-details.component';
+import { PhoneNumberComponent } from './components/phone-number/phone-number.component';
+import { TestComponent } from './components/test/test.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { PhoneDetailsComponent } from './components/phone-details/phone-details.
     UserAddComponent,
     UserDetailsComponent,
     PhoneAddComponent,
-    PhoneDetailsComponent
+    PhoneDetailsComponent,
+    PhoneNumberComponent,
+    TestComponent
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, FormArray, Validators } from '@angular/forms';
+import { FormBuilder, FormsModule, FormControl, FormGroup, FormArray, Validators } from '@angular/forms';
 import { User } from 'src/app/models/user';
 import { Phone } from 'src/app/models/phone';
 import { USER } from 'src/app/mock-data';

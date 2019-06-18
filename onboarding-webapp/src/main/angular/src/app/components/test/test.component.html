@@ -1,0 +1,11 @@
+<form (ngSubmit)="save(form)" [formGroup]="form">
+    <div class="form-group">
+        <label for="phone-one">Phone <span class="text-danger">*</span></label>
+        <app-phone-number id="phone-one" formControlName="phoneOne"></app-phone-number>
+    </div>
+    <h1>Value: {{ profileForm.get('form').value }}</h1>
+    <h1>Touched: {{ profileForm.get('form').touched }}</h1>
+    <h1>Dirty: {{ profileForm.get('form').dirty }}</h1>
+    <h1>Error: {{ profileForm.get('form').hasError('required') }}</h1>
+    <button type="submit">Submit</button>
+</form>

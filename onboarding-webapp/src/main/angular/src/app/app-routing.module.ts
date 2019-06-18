@@ -1,3 +1,5 @@
+import { PhoneNumberComponent } from './components/phone-number/phone-number.component';
+import { TestComponent } from './components/test/test.component';
 import { UserListComponent } from './components/user-list/user-list.component';
 import { UserDetailsComponent } from './components/user-details/user-details.component';
 import { NgModule } from '@angular/core';
@@ -12,6 +14,9 @@ const routes: Routes = [
   },
   {
     path: 'detail/:id', component: UserDetailsComponent
+  },
+  {
+    path: 'test', component: PhoneNumberComponent
   }
 ];
 
