@@ -21,6 +21,7 @@ export class UserService {
       );
   }
 
+  /*
   getUsersSortedByFirst(): Observable<User[]> {
     return this.http.get<User[]>(this.usersUrl + '/sortFirst')
       .pipe(
@@ -41,6 +42,7 @@ export class UserService {
       catchError(this.handleError)
     );
   }
+  */
 
   getPageSorted(i): Observable<any> {
     return this.http.get<any>(this.usersUrl + '?page=' + i)

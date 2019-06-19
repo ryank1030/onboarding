@@ -29,6 +29,7 @@ export class UserListComponent implements OnInit {
     this.getPage(0);
   }
 
+  /*
   getUsers(): void {
     this.userService.getUsers()
       .subscribe(users => this.users = users);
@@ -42,6 +43,7 @@ export class UserListComponent implements OnInit {
         console.log(this.page.totalPages);
       });
   }
+  */
 
   getPage(i): void {  //testing
     console.log('i = ' + i);
@@ -56,12 +58,14 @@ export class UserListComponent implements OnInit {
       });
   }
 
+  /*
   addUser(username: string, firstName: string, lastName: string, phones: Phone[]) {
     this.userService.addUser({username, firstName, lastName, phones} as User)
     .subscribe(user => {
       this.users.push(user);
     });
   }
+  */
 
   toggleAddUser() {
     this.toggle = !this.toggle;
@@ -69,6 +73,14 @@ export class UserListComponent implements OnInit {
 
   receiveToggle($event) {
     this.toggle = $event;
+  }
+
+  receiveUsers($event) {
+    this.users = $event;
+  }
+
+  receiveNav($event) {
+    this.navArray = $event;
   }
 
   userClick(user: User) {

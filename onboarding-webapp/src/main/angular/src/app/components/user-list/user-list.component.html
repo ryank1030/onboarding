@@ -26,4 +26,4 @@
     </ul>
   </nav>
 <button class="btn btn-outline-primary btn-block" (click)="toggleAddUser()" *ngIf="!toggle"><i class="fas fa-user-plus"></i> Add User</button>
-<app-user-add (toggleEvent)="receiveToggle($event)" [users]="users" [toggle]="toggle"></app-user-add>
+<app-user-add (toggleEvent)="receiveToggle($event)" (userEvent)="receiveUsers($event)" (navEvent)="receiveNav($event)" [toggle]="toggle"></app-user-add>
