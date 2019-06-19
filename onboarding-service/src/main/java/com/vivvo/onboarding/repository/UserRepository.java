@@ -1,10 +1,12 @@
 package com.vivvo.onboarding.repository;
 
 import com.vivvo.onboarding.entity.User;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.awt.print.Pageable;
+
 import java.util.List;
 import java.util.UUID;
 
@@ -20,7 +22,19 @@ public interface UserRepository extends JpaRepository<User, UUID> {
 
     List<User> findByLastName(String lastName);
 
-    //List<User> findAllByFirstName(String firstName, Pageable pageable);
+    Page<User> findByFirstNameContainsOrLastNameContainsOrUsernameContains(String firstName, String lastName, String username, Pageable pageable);
+
+    //Page<User> findAllByUsername(String username, Pageable pageable);
+
+    //Page<User> findAllByFirstName(String firstName, Pageable pageable);
+
+    //Page<User> findAllByLastName(String lastName, Pageable pageable);
+
+    //Page<User> findAllByPhoneNumber(String phoneNumber, Pageable pageable);
+
+
+
+
 
 }
 

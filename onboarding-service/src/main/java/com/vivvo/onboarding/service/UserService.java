@@ -10,10 +10,10 @@ import com.vivvo.onboarding.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.awt.print.Pageable;
 import java.util.*;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
@@ -128,48 +128,13 @@ public class UserService {
                 .collect(Collectors.toList());
     }
 
-    public Page<UserDto> getPageSorted(){
-        //getting a page request
-        PageRequest firstPageWithTwoElements = PageRequest.of(0,2);
-        Page<UserDto> allUsers = userRepository.findAll(firstPageWithTwoElements).map(userAssembler::assemble);
-        System.out.println("Elements: " + allUsers.getTotalElements());
-        System.out.println("Pages: " + allUsers.getTotalPages());
-        allUsers.forEach(System.out::println);
-
-        System.out.println("--break--");
-
-        //getting sorted request
-        List<UserDto> allUsersByFirstName = userRepository.findAll(Sort.by("firstName"))
-                .stream()
-                .map(userAssembler::assemble)
-                .collect(Collectors.toList());
-        allUsersByFirstName.forEach(System.out::println);
-
-        System.out.println("--break--");
-
-        //getting sorted page request
-        PageRequest firstPageWithTwoElementsSorted = PageRequest.of(0,2, Sort.by("username"));
-        List<UserDto> allUsersByUser = userRepository.findAll(firstPageWithTwoElementsSorted)
-                .stream()
-                .map(userAssembler::assemble)
-                .collect(Collectors.toList());
-        allUsersByUser.forEach(System.out::println);
-
-        System.out.println("--break--");
-
-        //this will be the final function
-        PageRequest getPageSortedByFirstName = PageRequest.of(0, 2, Sort.by("firstName")); //make these variables in the future
-        Page<UserDto> userPage = userRepository.findAll(getPageSortedByFirstName)
+    public Page<UserDto> getPageSortedByFirst(int page, int size) {
+        return userRepository.findAll(PageRequest.of(page, size, Sort.by("firstName")))
                 .map(userAssembler::assemble);
-        System.out.println("Elements: " + userPage.getTotalElements());
-        System.out.println("Pages: " + userPage.getTotalPages());
-        userPage.forEach(System.out::println);
-
-        return userPage;
     }
 
-    public Page<UserDto> getPage(int i) {
-        return userRepository.findAll(PageRequest.of(i, 3, Sort.by("firstName")))
-                .map(userAssembler::assemble);
+    public Page<UserDto> getPageSearch(int page, int size, String search) {
+            return userRepository.findByFirstNameContainsOrLastNameContainsOrUsernameContains(search, search, search, PageRequest.of(page, size))
+                    .map(userAssembler::assemble);
     }
 }

@@ -27,14 +27,12 @@ export class UserAddComponent implements OnInit {
     ]),
   });
 
-  //@Input() users: User[];
   @Input() toggle: boolean;
-  //@Input() navArray;
   @Output() toggleEvent = new EventEmitter();
   @Output() userEvent = new EventEmitter();
   @Output() navEvent = new EventEmitter();
   errors: Error;
-  page: any;
+
 
   constructor(
     private fb: FormBuilder,
@@ -57,7 +55,6 @@ export class UserAddComponent implements OnInit {
   addUser(u: User) {
     this.userService.addUser(u)
       .subscribe(() => {
-        //this.users.push(user);  //can't push onto the user, need to re querry the database, display sucsess message when adding
         this.toggleComponent();
         this.getPage(0);
     },
@@ -66,17 +63,11 @@ export class UserAddComponent implements OnInit {
     });
   }
 
-  getPage(i): void {  //testing
-    console.log('i = ' + i);
+  getPage(i): void {
     this.userService.getPageSorted(i)
       .subscribe(page => {
-        this.page = page;
         this.userEvent.emit(page.content);
-        this.navEvent.emit(Array(page.totalPages))
-        //this.navArray = Array(this.page.totalPages);
-        console.log('Current Page: ' + this.page.number);
-        console.log('Number of pages: ' + this.page.totalPages);
-        console.log('Number of elements: ' + this.page.numberOfElements);
+        this.navEvent.emit(Array(page.totalPages));
       });
   }
 

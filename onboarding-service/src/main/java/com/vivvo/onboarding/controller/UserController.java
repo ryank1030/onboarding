@@ -26,11 +26,11 @@ public class UserController {
     @GetMapping("/sortLast")
     public List<UserDto> sortByLastName() { return userService.sortByLastName();}
 
-    @GetMapping("/page")
-    public Page<UserDto> getPageSorted() { return userService.getPageSorted();}  //testing
+    @GetMapping(params = {"page", "size"})
+    public Page<UserDto> getPageSortedByFirst(@RequestParam int page, @RequestParam int size) { return userService.getPageSortedByFirst(page, size);}
 
-    @GetMapping(params = "page")
-    public Page<UserDto> getPage(@RequestParam int page) { return userService.getPage(page);}
+    @GetMapping(params = {"page", "size", "search"})
+    public Page<UserDto> getPageSearch(@RequestParam int page, @RequestParam int size, @RequestParam String search) { return userService.getPageSearch(page, size, search);}
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)

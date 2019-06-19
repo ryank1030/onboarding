@@ -11,6 +11,7 @@ import {Observable, of, throwError} from "rxjs";
 export class UserService {
 
   private usersUrl = './api/v1/users';
+  private pageSize = 3;
 
   constructor(private http: HttpClient) { }
 
@@ -21,31 +22,8 @@ export class UserService {
       );
   }
 
-  /*
-  getUsersSortedByFirst(): Observable<User[]> {
-    return this.http.get<User[]>(this.usersUrl + '/sortFirst')
-      .pipe(
-        catchError(this.handleError)
-      );
-  }
-
-  getUsersSortedByLast(): Observable<User[]> {
-    return this.http.get<User[]>(this.usersUrl + '/sortLast')
-      .pipe(
-        catchError(this.handleError)
-      );
-  }
-
-  getPageSortedbyFirst(): Observable<any> {
-    return this.http.get<any>(this.usersUrl + '/page')
-    .pipe(
-      catchError(this.handleError)
-    );
-  }
-  */
-
   getPageSorted(i): Observable<any> {
-    return this.http.get<any>(this.usersUrl + '?page=' + i)
+    return this.http.get<any>(this.usersUrl + '?page=' + i + '&size=' + this.pageSize)
       .pipe(
         catchError(this.handleError)
       );

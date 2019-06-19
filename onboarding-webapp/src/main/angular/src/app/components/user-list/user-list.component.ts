@@ -13,7 +13,6 @@ import { Router } from '@angular/router';
 export class UserListComponent implements OnInit {
 
   users: User[];
-  page: any;
   toggle = false;
   navArray;
 
@@ -24,48 +23,16 @@ export class UserListComponent implements OnInit {
   }
 
   ngOnInit() {
-    //this.getUsers();
-    //this.getPageSorted();
     this.getPage(0);
   }
 
-  /*
-  getUsers(): void {
-    this.userService.getUsers()
-      .subscribe(users => this.users = users);
-  }
-
-  getPageSorted(): void {
-    this.userService.getPageSortedbyFirst()
-      .subscribe(page => {
-        this.page = page;
-        //this.users = page.content;
-        console.log(this.page.totalPages);
-      });
-  }
-  */
-
-  getPage(i): void {  //testing
-    console.log('i = ' + i);
+  getPage(i): void {
     this.userService.getPageSorted(i)
       .subscribe(page => {
-        this.page = page;
         this.users =  page.content;
-        this.navArray = Array(this.page.totalPages);
-        console.log('Current Page: ' + this.page.number);
-        console.log('Number of pages: ' + this.page.totalPages);
-        console.log('Number of elements: ' + this.page.numberOfElements);
+        this.navArray = Array(page.totalPages);
       });
   }
-
-  /*
-  addUser(username: string, firstName: string, lastName: string, phones: Phone[]) {
-    this.userService.addUser({username, firstName, lastName, phones} as User)
-    .subscribe(user => {
-      this.users.push(user);
-    });
-  }
-  */
 
   toggleAddUser() {
     this.toggle = !this.toggle;

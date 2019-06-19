@@ -30,11 +30,11 @@ public class UserController {
     @GetMapping("/sortLast")
     public List<UserDto> sortByLastName() { return userClient.sortByLastName();}
 
-    @GetMapping("/page")
-    public Object getPageSorted() { return userClient.getPageSorted(); }
+    @GetMapping(params = {"page", "size"})
+    public Object getPageSortedByFirst(@RequestParam int page, @RequestParam int size) { return userClient.getPageSortedByFirst(page, size);}
 
-    @GetMapping(params = "page")
-    public Object getPage(@RequestParam int page) { return userClient.getPage(page);}
+    @GetMapping(params = {"page", "size", "search"})
+    public Object getPageSearch(@RequestParam int page, @RequestParam int size, @RequestParam String search) { return userClient.getPageSearch(page, size, search);}
 
     //working
     @PostMapping

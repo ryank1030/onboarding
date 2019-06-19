@@ -34,16 +34,19 @@ public class UserClient {
                 .get(new GenericType<List<UserDto>>(){});
     }
 
-    public Object getPageSorted() {
+    public Object getPageSortedByFirst(int page, int size) {
         return userTarget()
-                .path("/page")
+                .queryParam("page", page)
+                .queryParam("size", size)
                 .request()
                 .get(Object.class);
     }
 
-    public Object getPage(int i) {
+    public Object getPageSearch(int page, int size, String search) {
         return userTarget()
-                .queryParam("page", i)
+                .queryParam("page", page)
+                .queryParam("size", size)
+                .queryParam("search", search)
                 .request()
                 .get(Object.class);
     }
