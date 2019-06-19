@@ -15,6 +15,7 @@ export class UserListComponent implements OnInit {
   users: User[];
   toggle = false;
   navArray;
+  test = 'hello';
 
   constructor(
     private userService: UserService,
@@ -52,6 +53,14 @@ export class UserListComponent implements OnInit {
 
   userClick(user: User) {
     this.router.navigate(['detail/' + user.userId]);
+  }
+
+  searchData(value: string) {
+    this.userService.getPageSearch(0, value)
+      .subscribe(page => {
+        this.users =  page.content;
+        this.navArray = Array(page.totalPages);
+      });
   }
 }
 

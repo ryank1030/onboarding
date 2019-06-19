@@ -29,6 +29,13 @@ export class UserService {
       );
   }
 
+  getPageSearch(i, search: string) {
+    return this.http.get<any>(this.usersUrl + '?page=' + i + '&size=' + this.pageSize + '&search=' + search)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
   addUser(user: User): Observable<User> {
     return this.http.post<User>(this.usersUrl, user)
       .pipe(
