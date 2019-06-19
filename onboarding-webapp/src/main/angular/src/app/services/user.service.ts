@@ -11,7 +11,7 @@ import {Observable, of, throwError} from "rxjs";
 export class UserService {
 
   private usersUrl = './api/v1/users';
-  private pageSize = 3;
+  private pageSize = 10;
 
   constructor(private http: HttpClient) { }
 
