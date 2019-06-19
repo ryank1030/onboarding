@@ -10,7 +10,7 @@ Search: <input type="text" class="input" (input)="searchData($event.target.value
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let user of users; let i = index" (click)="userClick(user)">
+    <tr *ngFor="let user of users | slice: 0:4; let i = index" (click)="userClick(user)">
       <th scope="row">{{i+1}}</th>
       <td>{{user.username}}</td>
       <td>{{user.firstName}}</td>
@@ -19,12 +19,6 @@ Search: <input type="text" class="input" (input)="searchData($event.target.value
     </tr>
   </tbody>
 </table>
-<nav aria-label="Page navigation example">
-    <ul class="pagination">
-      <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-      <li class="page-item" *ngFor="let page of navArray; let i = index"><a class="page-link" (click)="getPage(i)">{{i+1}}</a></li>
-      <li class="page-item"><a class="page-link" href="#">Next</a></li>
-    </ul>
-  </nav>
+<ngb-pagination [collectionSize]="collectionSize" [pageSize]="pageSize" [(page)]="page" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="getPage(page-1)"></ngb-pagination>
 <button class="btn btn-outline-primary btn-block" (click)="toggleAddUser()" *ngIf="!toggle"><i class="fas fa-user-plus"></i> Add User</button>
 <app-user-add (toggleEvent)="receiveToggle($event)" (userEvent)="receiveUsers($event)" (navEvent)="receiveNav($event)" [toggle]="toggle"></app-user-add>

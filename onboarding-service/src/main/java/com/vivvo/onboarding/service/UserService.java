@@ -137,4 +137,29 @@ public class UserService {
             return userRepository.findByFirstNameContainsOrLastNameContainsOrUsernameContains(search, search, search, PageRequest.of(page, size))
                     .map(userAssembler::assemble);
     }
+
+    public void createMassUsers(int num) {
+        for(int i = 0; i < num; i++) {
+            create(getValidUserDto()
+                    .setUsername(String.valueOf(i))
+                    .setFirstName(String.valueOf(i)));
+        }
+    }
+
+    private UserDto getValidUserDto() {
+        return new UserDto()
+                .setFirstName("Test")
+                .setLastName("test")
+                .setUsername("test")
+                .setPhones(Collections.singletonList(getValidPhoneDto(UUID.randomUUID())));
+    }
+
+    private PhoneDto getValidPhoneDto(UUID userId) {
+        return new PhoneDto()
+                .setUserId(userId)
+                .setPhoneId(UUID.randomUUID())
+                .setPhoneNumber("1112223333")
+                .setVerified(false)
+                .setPrimary(true);
+    }
 }

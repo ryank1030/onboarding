@@ -26,6 +26,9 @@ public class UserController {
     @GetMapping("/sortLast")
     public List<UserDto> sortByLastName() { return userService.sortByLastName();}
 
+    @GetMapping(params = "createUsers")
+    public void createMassUsers(@RequestParam int createUsers) { userService.createMassUsers(createUsers);}
+
     @GetMapping(params = {"page", "size"})
     public Page<UserDto> getPageSortedByFirst(@RequestParam int page, @RequestParam int size) { return userService.getPageSortedByFirst(page, size);}
 

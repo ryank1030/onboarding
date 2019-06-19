@@ -14,8 +14,10 @@ export class UserListComponent implements OnInit {
 
   users: User[];
   toggle = false;
+  collectionSize;
+  pageSize;
   navArray;
-  test = 'hello';
+  page = 0;
 
   constructor(
     private userService: UserService,
@@ -30,7 +32,10 @@ export class UserListComponent implements OnInit {
   getPage(i): void {
     this.userService.getPageSorted(i)
       .subscribe(page => {
+        console.log(page);
         this.users =  page.content;
+        this.collectionSize = page.totalElements;
+        this.pageSize = page.size;
         this.navArray = Array(page.totalPages);
       });
   }
