@@ -41,6 +41,13 @@ public class UserClient {
                 .get(Object.class);
     }
 
+    public Object getPage(int i) {
+        return userTarget()
+                .queryParam("page", i)
+                .request()
+                .get(Object.class);
+    }
+
     public UserDto update(UserDto dto) {
         return userTarget(dto.getUserId())
                 .request()

@@ -15,6 +15,7 @@ export class UserListComponent implements OnInit {
   users: User[];
   page: any;
   toggle = false;
+  navArray = Array(5);
 
   constructor(
     private userService: UserService,
@@ -36,7 +37,17 @@ export class UserListComponent implements OnInit {
     this.userService.getPageSortedbyFirst()
       .subscribe(page => {
         this.page = page;
-        console.log(this.page);
+        //this.users = page.content;
+        console.log(this.page.totalPages);
+      });
+  }
+
+  getPage(i): void {  //testing
+    console.log('i = ' + i);
+    this.userService.getPageSorted(i)
+      .subscribe(page => {
+        //this.page = page;
+        console.log(this.page.pageNumber);
       });
   }
 

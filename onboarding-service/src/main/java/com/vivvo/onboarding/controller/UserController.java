@@ -27,7 +27,10 @@ public class UserController {
     public List<UserDto> sortByLastName() { return userService.sortByLastName();}
 
     @GetMapping("/page")
-    public Page<UserDto> getPageSorted() { return userService.getPageSorted();}
+    public Page<UserDto> getPageSorted() { return userService.getPageSorted();}  //testing
+
+    @GetMapping(params = "page")
+    public Page<UserDto> getPage(@RequestParam int page) { return userService.getPage(page);}
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)

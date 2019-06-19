@@ -167,4 +167,9 @@ public class UserService {
 
         return userPage;
     }
+
+    public Page<UserDto> getPage(int i) {
+        return userRepository.findAll(PageRequest.of(i, 3, Sort.by("firstName")))
+                .map(userAssembler::assemble);
+    }
 }

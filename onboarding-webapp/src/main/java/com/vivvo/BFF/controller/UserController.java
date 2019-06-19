@@ -33,6 +33,9 @@ public class UserController {
     @GetMapping("/page")
     public Object getPageSorted() { return userClient.getPageSorted(); }
 
+    @GetMapping(params = "page")
+    public Object getPage(@RequestParam int page) { return userClient.getPage(page);}
+
     //working
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)

@@ -18,5 +18,12 @@
     </tr>
   </tbody>
 </table>
+<nav aria-label="Page navigation example">
+    <ul class="pagination">
+      <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+      <li class="page-item" *ngFor="let page of navArray; let i = index"><a class="page-link" (click)="getPage(i+1)">{{i+1}}</a></li>
+      <li class="page-item"><a class="page-link" href="#">Next</a></li>
+    </ul>
+  </nav>
 <button class="btn btn-outline-primary btn-block" (click)="toggleAddUser()" *ngIf="!toggle"><i class="fas fa-user-plus"></i> Add User</button>
 <app-user-add (toggleEvent)="receiveToggle($event)" [users]="users" [toggle]="toggle"></app-user-add>
