@@ -32,7 +32,6 @@ export class UserListComponent implements OnInit {
   getPage(i): void {
     this.userService.getPageSorted(i)
       .subscribe(page => {
-        console.log(page);
         this.users =  page.content;
         this.collectionSize = page.totalElements;
         this.pageSize = page.size;
