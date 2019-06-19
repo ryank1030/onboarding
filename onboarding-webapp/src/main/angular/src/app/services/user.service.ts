@@ -42,15 +42,11 @@ export class UserService {
     );
   }
 
-  getPageSorted(i): Observable<any> {   //testing how to get a page
-    console.log('getPageSorted() = ' + i);
-    return null;
-    /*
+  getPageSorted(i): Observable<any> {
     return this.http.get<any>(this.usersUrl + '?page=' + i)
       .pipe(
         catchError(this.handleError)
       );
-      */
   }
 
   addUser(user: User): Observable<User> {
