@@ -1,12 +1,14 @@
 package com.vivvo.onboarding;
 
 import lombok.Setter;
+import sun.jvm.hotspot.debugger.Page;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.GenericType;
+import javax.ws.rs.core.Response;
 import java.util.List;
 import java.util.UUID;
 
@@ -30,6 +32,13 @@ public class UserClient {
         return userTarget()
                 .request()
                 .get(new GenericType<List<UserDto>>(){});
+    }
+
+    public Object getPageSorted() {
+        return userTarget()
+                .path("/page")
+                .request()
+                .get(Object.class);
     }
 
     public UserDto update(UserDto dto) {

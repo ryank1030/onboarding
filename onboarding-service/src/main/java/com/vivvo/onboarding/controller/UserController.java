@@ -3,6 +3,7 @@ package com.vivvo.onboarding.controller;
 import com.vivvo.onboarding.UserDto;
 import com.vivvo.onboarding.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,6 +25,9 @@ public class UserController {
 
     @GetMapping("/sortLast")
     public List<UserDto> sortByLastName() { return userService.sortByLastName();}
+
+    @GetMapping("/page")
+    public Page<UserDto> getPageSorted() { return userService.getPageSorted();}
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)

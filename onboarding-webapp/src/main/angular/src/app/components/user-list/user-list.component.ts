@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 export class UserListComponent implements OnInit {
 
   users: User[];
+  page: any;
   toggle = false;
 
   constructor(
@@ -23,11 +24,20 @@ export class UserListComponent implements OnInit {
 
   ngOnInit() {
     this.getUsers();
+    this.getPageSorted();
   }
 
   getUsers(): void {
     this.userService.getUsers()
       .subscribe(users => this.users = users);
+  }
+
+  getPageSorted(): void {
+    this.userService.getPageSortedbyFirst()
+      .subscribe(page => {
+        this.page = page;
+        console.log(this.page);
+      });
   }
 
   addUser(username: string, firstName: string, lastName: string, phones: Phone[]) {

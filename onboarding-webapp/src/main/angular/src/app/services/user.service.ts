@@ -35,6 +35,13 @@ export class UserService {
       );
   }
 
+  getPageSortedbyFirst(): Observable<any> {
+    return this.http.get<any>(this.usersUrl + '/page')
+    .pipe(
+      catchError(this.handleError)
+    );
+  }
+
   addUser(user: User): Observable<User> {
     return this.http.post<User>(this.usersUrl, user)
       .pipe(

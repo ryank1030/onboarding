@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import sun.jvm.hotspot.debugger.Page;
 
+import javax.ws.rs.core.Response;
 import java.util.List;
 import java.util.UUID;
 
@@ -27,6 +29,9 @@ public class UserController {
 
     @GetMapping("/sortLast")
     public List<UserDto> sortByLastName() { return userClient.sortByLastName();}
+
+    @GetMapping("/page")
+    public Object getPageSorted() { return userClient.getPageSorted(); }
 
     //working
     @PostMapping
